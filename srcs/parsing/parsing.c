@@ -1,4 +1,4 @@
 #include "cub.h"
 
-int validate_input()
+//int validate_input()
 
