@@ -4,6 +4,7 @@ CFLAGS  := -Iincludes #-g -Wall -Wextra -Werror
 
 # Directories
 OBJDIR  := objs
+LIBDIR	:= libft
 
 # Executable
 NAME    := cub3d
@@ -15,10 +16,8 @@ SRC     := srcs/main/main.c \
 # Object files
 OBJ     := $(SRC:srcs/%.c=$(OBJDIR)/%.o)
 
-# Libft Integration
-LIBFT_DIR   := ./libft
-LIBFT       := $(LIBFT_DIR)/libft.a
-LIBFT_H     := $(LIBFT_DIR)/libft.h
+# Libft
+LIBFT	:= $(LIBDIR)/libft.a
 
 # Colors
 GREEN   := \033[0;32m
@@ -28,6 +27,10 @@ RESET   := \033[0m
 
 all: $(NAME)
 
+$(NAME): $(OBJ) $(LIBFT)
+	@$(CC) $(CFLAGS) -o $@ $^ -lreadline
+	@echo "$(CYAN)🚀 Built: $@$(RESET)"
+
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) -o $@ $^
 	@echo "$(CYAN)🚀 Built: $@$(RESET)"
@@ -36,6 +39,9 @@ $(OBJDIR)/%.o: srcs/%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "$(GREEN)🛠️  Compiled:$(RESET) $<"
+
+$(LIBFT):
+	@make -C libft
 
 clean:
 	@rm -rf $(OBJDIR)

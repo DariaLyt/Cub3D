@@ -7,7 +7,7 @@
 # include <math.h>
 # include <fcntl.h>
 # include "structs.h"
-# include "libft.h"
+# include "../libft/libft.h"
 
 // Main
 int run_game(char *map_name, t_game *game);
