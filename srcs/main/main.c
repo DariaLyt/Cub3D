@@ -1,14 +1,19 @@
+#include "cub.h"
 
-int main(int argc, char **argv)
+int	run_game(char *map_name, t_game *game)
 {
-	if(argc == 2)
-		run_game(argv[1]);
-	else
-		printf("doofus");
+	parsing(map_name, game);
+	// execution();
+	return(0);
 }
 
-void run_game(char *map_name)
+int	main(int argc, char **argv)
 {
-	parsing();
-	execution();
+	t_game	game;
+
+	if (argc == 2)
+		run_game(argv[1], &game);
+	else
+		printf("doofus");
+	return (0);
 }

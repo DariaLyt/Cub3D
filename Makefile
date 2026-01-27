@@ -1,6 +1,6 @@
 # Compiler
 CC      := cc
-#CFLAGS  := -g -Wall -Wextra -Werror
+CFLAGS  := -Iincludes #-g -Wall -Wextra -Werror 
 
 # Directories
 OBJDIR  := objs
@@ -9,13 +9,16 @@ OBJDIR  := objs
 NAME    := cub3d
 
 # Source files
-SRC     := srcs/main.c \
+SRC     := srcs/main/main.c \
            srcs/parsing/parsing.c \
-		   srcs/ \
-
 
 # Object files
 OBJ     := $(SRC:srcs/%.c=$(OBJDIR)/%.o)
+
+# Libft Integration
+LIBFT_DIR   := ./libft
+LIBFT       := $(LIBFT_DIR)/libft.a
+LIBFT_H     := $(LIBFT_DIR)/libft.h
 
 # Colors
 GREEN   := \033[0;32m

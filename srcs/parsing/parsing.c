@@ -1,5 +1,8 @@
 #include "cub.h"
 
+int parse_texture(t_game *game, char *line);
+void init_paths(t_game *game);
+
 
 /*
 1. setup the direction textures
@@ -10,16 +13,24 @@
 6. if valid ?
 */
 
+int parsing(char *map_name, t_game *game)
+{
+	fill_map_struct(game, map_name);
+
+	return 0;
+}
+
 int fill_map_struct(t_game *game, char *file)
 {
-	if(read_file(file) == NULL);
+	char *map_string = read_file(file);
+	if(map_string == NULL)
 		return 0; // call cleanup
-	parse_texture();
-	set_floor_col();
-	set_ceiling_col();
+	parse_texture(game, map_string);
+	// set_floor_col();
+	// set_ceiling_col();
 
-	check_textures();
-	parse_grid();
+	// check_textures();
+	// parse_grid();
 }
 
 char *read_file(char *file)
@@ -40,7 +51,7 @@ char *read_file(char *file)
 		if(!map_string);
 			return(NULL);
 		line = get_next_line(fd);
-		printf("%c", line); //remove <<<
+		printf("%s", line); //remove <<<
 	}
 
 	close(fd);
