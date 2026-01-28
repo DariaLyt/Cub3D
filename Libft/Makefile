@@ -38,7 +38,7 @@ OBJS = $(SRCS:.c=.o)
 #.SECONDARY: $(B_OBJS)
 
 $(NAME): $(OBJS)
-	ar -rcs $(NAME) -o $@ $^
+	ar -rcs $(NAME) $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 

@@ -1,10 +1,14 @@
 # Compiler
 CC      := cc
-CFLAGS  := -Iincludes #-g -Wall -Wextra -Werror 
-
+#CFLAGS  := -g -Wall -Wextra -Werror
+DFLAGS := -MMD -MP \
+		 -I includes \
+		 -I Libft/
 # Directories
 OBJDIR  := objs
-LIBDIR	:= libft
+
+LIBFT_DIR := Libft
+LIBFT_A := $(LIBFT_DIR)/libft.a
 
 # Executable
 NAME    := cub3d
@@ -12,12 +16,10 @@ NAME    := cub3d
 # Source files
 SRC     := srcs/main/main.c \
            srcs/parsing/parsing.c \
+		   srcs/parsing/parsing_utils.c
 
 # Object files
 OBJ     := $(SRC:srcs/%.c=$(OBJDIR)/%.o)
-
-# Libft
-LIBFT	:= $(LIBDIR)/libft.a
 
 # Colors
 GREEN   := \033[0;32m
@@ -27,28 +29,26 @@ RESET   := \033[0m
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) -o $@ $^ -lreadline
-	@echo "$(CYAN)🚀 Built: $@$(RESET)"
+$(LIBFT_A):
+	@make -s -C $(LIBFT_DIR)
 
-$(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) -o $@ $^
+$(NAME): $(OBJ) $(LIBFT_A)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT_A) -o $(NAME)
 	@echo "$(CYAN)🚀 Built: $@$(RESET)"
 
 $(OBJDIR)/%.o: srcs/%.c
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(DFLAGS) -c $< -o $@
 	@echo "$(GREEN)🛠️  Compiled:$(RESET) $<"
-
-$(LIBFT):
-	@make -C libft
 
 clean:
 	@rm -rf $(OBJDIR)
+	@make clean -s -C $(LIBFT_DIR)
 	@echo "$(YELLOW)🧹 Cleaned Cub3d object files.$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
+	@make fclean -s -C $(LIBFT_DIR)
 	@echo "$(YELLOW)🗑️  Removed Cub3d binary.$(RESET)"
 
 re: fclean all

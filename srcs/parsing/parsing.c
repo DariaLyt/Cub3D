@@ -30,6 +30,7 @@ int	fill_map_struct(t_game *game, char *file)
 	// set_ceiling_col();
 	// check_textures();
 	// parse_grid();
+	return 0;
 }
 
 char	*read_file(char *file)
@@ -59,10 +60,11 @@ char	*read_file(char *file)
 int	parse_texture(t_game *game, char *line)
 {
 	init_paths(game);
-	find_path_no(game, line);
-	find_path_so(game, line);
-	find_path_ea(game, line);
-	find_path_we(game, line);
+	// find_path_no(game, line);
+	// find_path_so(game, line);
+	// find_path_ea(game, line);
+	// find_path_we(game, line);
+	return 0;
 }
 
 void	init_paths(t_game *game)
@@ -78,8 +80,9 @@ int	find_path_no(t_game *game, char *line)
 {
 	char	*path;
 
-	path = ft_strchr("NO ./");
+	// path = ft_strchr("NO ./");
 	open(path, O_RDONLY);
+	return 0;
 }
 
 int	find_path_so(void)
