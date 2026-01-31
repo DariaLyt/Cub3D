@@ -21,8 +21,11 @@ char	*ft_strjoin_and_free(char *map_whole, char *line);
 // Execution
 
 // Error & Cleanup
+void free_map(t_game *game);
 
-// Utils
+// Parsing Utils
+int is_empty_line(char *str);
+int is_space(char c);
 
 // library?
 
