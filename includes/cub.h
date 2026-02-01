@@ -26,7 +26,9 @@ void free_map(t_game *game);
 // Parsing Utils
 int is_empty_line(char *str);
 int is_space(char c);
+char *skip_spaces(char *str);
 
-// library?
+// Debug
+void print_game_data(t_game *game);
 
 #endif

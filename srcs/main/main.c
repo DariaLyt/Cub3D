@@ -3,6 +3,7 @@
 int	run_game(char *map_name, t_game *game)
 {
 	parsing(map_name, game);
+	print_game_data(game); // << debug print // delete when done
 	// execution();
 	return(0);
 }

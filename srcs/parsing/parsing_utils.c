@@ -31,15 +31,13 @@ void free_map(t_game *game)
 	free(game->map.so_path);
 	free(game->map.ea_path);
 	free(game->map.we_path);
-	free(game->map.floor_col);
-	free(game->map.ceiling_col);
 }
 
 int is_space(char c)
 {
 	int i = 0;
 
-	if(c = ' ')
+	if(c == ' ' || (c >= 9 && c <= 13))
 		return 1;
 	else 
 		return 0;
@@ -51,6 +49,8 @@ int is_empty_line(char *str)
 
 	while(str[i])
 	{
+		if (str[i] != ' ' && str[i] != '\n' && str[i] != '\t')
+            return (0);
 		i++;
 	}
 	if(i > 0)
@@ -60,10 +60,9 @@ int is_empty_line(char *str)
 
 char *skip_spaces(char *str)
 {
-	while(*str)
-	{
-		if(*str == ' ' || '\t')
+	if(!str)
+		return (NULL);
+	while(*str == ' ' || *str == '\t')
 			str++;
-	}
 	return(str);
 }
