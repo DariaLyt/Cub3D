@@ -39,8 +39,14 @@ int	fill_map_struct(t_game *game, char *file)
 	if (fd == -1)
 		return (INVALID);
 	if (parse_file(game, fd) == INVALID)
+	{
+		close(fd);
 		return (INVALID);
-	return (0);
+	}
+	close(fd);
+	//convert list to **grid here
+	//clean temp list here // check libft
+	return (SUCCESS);
 }
 
 int	parse_file(t_game *game, int fd)
@@ -56,7 +62,7 @@ int	parse_file(t_game *game, int fd)
 			free(line);
 			continue;
 		}
-		if (count < 6)
+		if (count < 4) // change 6 when rgb ready
 		{
 			if (is_metadata(game, line) == SUCCESS)
 				count++;
@@ -70,7 +76,7 @@ int	parse_file(t_game *game, int fd)
 			add_to_map_list(game, line);
 		free(line);
 	}
-	if(count != 6)
+	if(count != 4) //change to 6 when rgb ready
 		return(INVALID);
 	return(SUCCESS);
 }
