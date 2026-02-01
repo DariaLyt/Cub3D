@@ -2,10 +2,16 @@
 
 int	run_game(char *map_name, t_game *game)
 {
-	parsing(map_name, game);
-	print_game_data(game); // << debug print // delete when done
+	// game = malloc(sizeof(t_game));
+	// if (!game)
+		// return (0);
+	init_game_struct(game);
+	if(parsing(map_name, game) == INVALID)
+		return(INVALID); // error and cleanup
+	printf("are we here?\n"); //printf debug
+	print_game_data(game); // << debug print // delete me when done
 	// execution();
-	return(0);
+	return (0);
 }
 
 int	main(int argc, char **argv)

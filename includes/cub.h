@@ -15,7 +15,6 @@ int		run_game(char *map_name, t_game *game);
 // Parsing
 int		parsing(char *map_name, t_game *game);
 int		fill_map_struct(t_game *game, char *file);
-char	*read_file(char *file);
 char	*ft_strjoin_and_free(char *map_whole, char *line);
 
 // Execution
@@ -24,6 +23,7 @@ char	*ft_strjoin_and_free(char *map_whole, char *line);
 void free_map(t_game *game);
 
 // Parsing Utils
+void	init_game_struct(t_game *game);
 int is_empty_line(char *str);
 int is_space(char c);
 char *skip_spaces(char *str);

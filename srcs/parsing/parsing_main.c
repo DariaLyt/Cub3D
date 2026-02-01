@@ -1,10 +1,14 @@
 #include "cub.h"
 
 int		parse_texture(t_game *game, char *line);
-void	init_game_struct(t_game *game);
 int		parse_file(t_game *game, int fd);
 int		is_metadata(t_game *game, char *line);
 int		save_path(char **dest, char *src);
+int		is_valid_map_line(char *line);
+int		add_to_map_list(t_game *game, char *line);
+int		is_valid_char(char c);
+void	update_map_dims(t_map *map, char *line);
+int		add_to_map_list(t_game *game, char *line);
 
 /*
 1. setup the direction textures
@@ -19,17 +23,12 @@ int	parsing(char *map_name, t_game *game)
 {
 	// if (validity check here)
 	// return (0);
-	game = malloc(sizeof(t_game));
-	if (!game)
-		return (0);
-	init_game_struct(game);
 	if (fill_map_struct(game, map_name) == INVALID)
 	{
 		free_map(game);
-		free(game);
-		return (0);
+		return (INVALID);
 	}
-	return (0);
+	return (SUCCESS);
 }
 
 int	fill_map_struct(t_game *game, char *file)
@@ -52,24 +51,28 @@ int	parse_file(t_game *game, int fd)
 	count = 0;
 	while ((line = get_next_line(fd)))
 	{
-		if (count < 6 && is_empty_line(line))
+		if (is_empty_line(line))
+		{
 			free(line);
+			continue;
+		}
 		if (count < 6)
 		{
 			if (is_metadata(game, line) == SUCCESS)
 				count++;
 			else
+			{
+				free(line);
 				return (INVALID);
+			}
 		}
 		else
-		{
-			if (add_to_map_list(game, line) == INVALID)
-				return (INVALID);
-		}
+			add_to_map_list(game, line);
 		free(line);
 	}
-	close(fd);
-	return (count == 6);
+	if(count != 6)
+		return(INVALID);
+	return(SUCCESS);
 }
 
 int	is_metadata(t_game *game, char *line)
@@ -80,11 +83,11 @@ int	is_metadata(t_game *game, char *line)
 	if (ft_strncmp(trimmed, "NO ", 3) == SUCCESS)
 		return (save_path(&game->map.no_path, trimmed + 3));
 	if (ft_strncmp(trimmed, "SO ", 3) == SUCCESS)
-		return (save_path(&game->map.no_path, trimmed + 3));
+		return (save_path(&game->map.so_path, trimmed + 3));
 	if (ft_strncmp(trimmed, "EA ", 3) == SUCCESS)
-		return (save_path(&game->map.no_path, trimmed + 3));
+		return (save_path(&game->map.ea_path, trimmed + 3));
 	if (ft_strncmp(trimmed, "WE ", 3) == SUCCESS)
-		return (save_path(&game->map.no_path, trimmed + 3));
+		return (save_path(&game->map.we_path, trimmed + 3));
 	// if (ft_strncmp(trimmed, "F ", 2) == 0)
 	// save_color(255);
 	// if (ft_strncmp(trimmed, "C ", 2) == 0)
@@ -105,6 +108,7 @@ void	init_game_struct(t_game *game)
 	game->map.grid = NULL;
 	game->map.width = 0;
 	game->map.height = 0;
+	game->map.temp_list = NULL;
 }
 
 int	save_path(char **dest, char *src)
@@ -133,19 +137,39 @@ int	save_color(char **dest, char *src)
 
 int	add_to_map_list(t_game *game, char *line)
 {
-	if (is_valid_map_line == INVALID)
-		return (INVALID);
+	t_list	*new_node;
 
-	
+	if (is_valid_map_line(line) == INVALID)
+		return (INVALID);
+	new_node = ft_lstnew(ft_strdup(line));
+	if (!new_node)
+		return (ALLOC_FAIL);
+	ft_lstadd_back(&(game->map.temp_list), new_node);
+	update_map_dims(&game->map, line);
+	return (SUCCESS);
+}
+
+void	update_map_dims(t_map *map, char *line)
+{
+	int	len;
+
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		len--;
+	if (len > map->width)
+		map->width = len;
+	map->height++;
 }
 
 int	is_valid_map_line(char *line)
 {
-	while(*line)
+	while (*line)
 	{
-		if(is_valid_char(*line) == INVALID);
-			return(INVALID);
+		if (is_valid_char(*line) == INVALID)
+			return (INVALID);
+		line++;
 	}
+	return(SUCCESS);
 }
 
 int	is_valid_char(char c)

@@ -15,8 +15,10 @@ NAME    := cub3d
 
 # Source files
 SRC     := srcs/main/main.c \
-           srcs/parsing/parsing.c \
-		   srcs/parsing/parsing_utils.c
+           srcs/parsing/parsing_main.c \
+		   srcs/parsing/parsing_utils.c \
+		   srcs/parsing/parsing_checks.c
+
 
 # Object files
 OBJ     := $(SRC:srcs/%.c=$(OBJDIR)/%.o)
