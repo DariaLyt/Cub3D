@@ -50,12 +50,12 @@ int is_empty_line(char *str)
 	while(str[i])
 	{
 		if (str[i] != ' ' && str[i] != '\n' && str[i] != '\t')
-            return (0);
+            return (SUCCESS);
 		i++;
 	}
 	if(i > 0)
-		return 1;
-	return 0;
+		return INVALID;
+	return SUCCESS;
 }
 
 char *skip_spaces(char *str)

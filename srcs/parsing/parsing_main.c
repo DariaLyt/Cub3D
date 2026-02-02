@@ -1,15 +1,5 @@
 #include "cub.h"
 
-int		parse_texture(t_game *game, char *line);
-int		parse_file(t_game *game, int fd);
-int		is_metadata(t_game *game, char *line);
-int		save_path(char **dest, char *src);
-int		is_valid_map_line(char *line);
-int		add_to_map_list(t_game *game, char *line);
-int		is_valid_char(char c);
-void	update_map_dims(t_map *map, char *line);
-int		add_to_map_list(t_game *game, char *line);
-
 /*
 1. setup the direction textures
 2. parse texture also initiliazes
@@ -57,7 +47,7 @@ int	parse_file(t_game *game, int fd)
 	count = 0;
 	while ((line = get_next_line(fd)))
 	{
-		if (is_empty_line(line))
+		if (is_empty_line(line) == SUCCESS)
 		{
 			free(line);
 			continue;
@@ -67,10 +57,7 @@ int	parse_file(t_game *game, int fd)
 			if (is_metadata(game, line) == SUCCESS)
 				count++;
 			else
-			{
-				free(line);
 				return (INVALID);
-			}
 		}
 		else
 			add_to_map_list(game, line);
@@ -98,6 +85,7 @@ int	is_metadata(t_game *game, char *line)
 	// save_color(255);
 	// if (ft_strncmp(trimmed, "C ", 2) == 0)
 	// save_color(255);
+	free(line);
 	return (INVALID);
 }
 
