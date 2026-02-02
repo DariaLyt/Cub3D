@@ -185,6 +185,34 @@ int	is_valid_char(char c)
 	return (INVALID);
 }
 
+// int convert_list_to_grid(t_game *game)
+// {
+//     t_list  *current;
+//     int     i;
+
+//     if (!game->map.temp_list)
+//         return (INVALID);
+//     // 1. Allocate the "rows" (height + 1 for the NULL terminator)
+//     game->map.grid = malloc(sizeof(char *) * (game->map.height + 1));
+//     if (!game->map.grid)
+//         return (ALLOC_FAIL);
+    
+//     current = game->map.temp_list;
+//     i = 0;
+//     while (current)
+//     {
+//         // 2. Transfer the string pointer from the node to the grid
+//         // We use ft_strdup here to keep the grid independent of the list
+//         game->map.grid[i] = ft_strdup(current->content);
+//         if (!game->map.grid[i])
+//             return (ALLOC_FAIL); // You should ideally free previous rows here
+//         current = current->next;
+//         i++;
+//     }
+//     game->map.grid[i] = NULL;
+//     return (SUCCESS);
+// }
+
 void	print_game_data(t_game *game)
 {
 	int	i;
