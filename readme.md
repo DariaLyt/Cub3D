@@ -4,6 +4,7 @@ Files
 • Turn in files All your files
 • Makefile all, clean, fclean, re, bonus
 • Arguments a map in format *.cub
+
 Allowed functions
 ====================
 • open, close, read, write,
@@ -19,9 +20,10 @@ Scope
 ====================
 • 4 textures
 • 2 colours (requires rgb/hex conversion)
-• Map size limit? 200? 300?
 
 • minimap?
+• Map size limit? 200? 300?
+• restrict args to exact file name?
 
 Variables
 ====================

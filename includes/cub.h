@@ -18,10 +18,11 @@ int		parse_file(t_game *game, int fd);
 
 // Map Validity check
 int		is_valid_map_line(char *line);
+char	*find_file(char *map_name);
 
 // Map struct
 void	init_game_struct(t_game *game);
-int		fill_map_struct(t_game *game, char *file);
+int		fill_map_struct(t_game *game, char *map_name);
 void	update_map_dims(t_map *map, char *line);
 
 // Metadata

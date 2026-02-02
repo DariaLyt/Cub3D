@@ -13,29 +13,46 @@ int	parsing(char *map_name, t_game *game)
 {
 	// if (validity check here)
 	// return (0);
-	if (fill_map_struct(game, map_name) == INVALID)
-	{
-		free_map(game);
+	if (fill_map_struct(game, (map_name)) == INVALID)
 		return (INVALID);
-	}
 	return (SUCCESS);
 }
 
-int	fill_map_struct(t_game *game, char *file)
+/*
+function to find the correct file
+do we need this one?
+*/
+char	*find_file(char *map_name)
+{
+	char	*path_name;
+	char	*extension;
+	int		fd;
+
+	extension = ".cub";
+	path_name = ft_strnstr(map_name, extension, ft_strlen(map_name));
+	fd = open(path_name, O_RDONLY);
+	if (fd == -1)
+		return (NULL);
+	close(fd);
+	return (path_name);
+}
+
+int	fill_map_struct(t_game *game, char *map_name)
 {
 	int	fd;
 
-	fd = open(file, O_RDONLY);
+	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
 		return (INVALID);
 	if (parse_file(game, fd) == INVALID)
 	{
 		close(fd);
+		free_map(game);
 		return (INVALID);
 	}
 	close(fd);
-	//convert list to **grid here
-	//clean temp list here // check libft
+	// convert list to **grid here
+	// clean temp list here // check libft
 	return (SUCCESS);
 }
 
@@ -50,7 +67,7 @@ int	parse_file(t_game *game, int fd)
 		if (is_empty_line(line))
 		{
 			free(line);
-			continue;
+			continue ;
 		}
 		if (count < 6) // change 6 when rgb ready
 		{
@@ -63,9 +80,9 @@ int	parse_file(t_game *game, int fd)
 			add_to_map_list(game, line);
 		free(line);
 	}
-	if(count != 6) //change to 6 when rgb ready
-		return(INVALID);
-	return(SUCCESS);
+	if (count != 6) // change to 6 when rgb ready
+		return (INVALID);
+	return (SUCCESS);
 }
 
 int	is_metadata(t_game *game, char *line)
@@ -165,7 +182,7 @@ int	is_valid_map_line(char *line)
 			return (INVALID);
 		line++;
 	}
-	return(SUCCESS);
+	return (SUCCESS);
 }
 
 int	is_valid_char(char c)
@@ -175,32 +192,31 @@ int	is_valid_char(char c)
 	return (INVALID);
 }
 
-int convert_list_to_grid(t_game *game)
+int	convert_list_to_grid(t_game *game)
 {
-    t_list  *current;
-    int     i;
+	t_list	*current;
+	int		i;
 
-    if (!game->map.temp_list)
-        return (INVALID);
-    // 1. Allocate the "rows" (height + 1 for the NULL terminator)
-    game->map.grid = malloc(sizeof(char *) * (game->map.height + 1));
-    if (!game->map.grid)
-        return (ALLOC_FAIL);
-    
-    current = game->map.temp_list;
-    i = 0;
-    while (current)
-    {
-        // 2. Transfer the string pointer from the node to the grid
-        // We use ft_strdup here to keep the grid independent of the list
-        game->map.grid[i] = ft_strdup(current->content);
-        if (!game->map.grid[i])
-            return (ALLOC_FAIL); // You should ideally free previous rows here
-        current = current->next;
-        i++;
-    }
-    game->map.grid[i] = NULL;
-    return (SUCCESS);
+	if (!game->map.temp_list)
+		return (INVALID);
+	// 1. Allocate the "rows" (height + 1 for the NULL terminator)
+	game->map.grid = malloc(sizeof(char *) * (game->map.height + 1));
+	if (!game->map.grid)
+		return (ALLOC_FAIL);
+	current = game->map.temp_list;
+	i = 0;
+	while (current)
+	{
+		// 2. Transfer the string pointer from the node to the grid
+		// We use ft_strdup here to keep the grid independent of the list
+		game->map.grid[i] = ft_strdup(current->content);
+		if (!game->map.grid[i])
+			return (ALLOC_FAIL); // You should ideally free previous rows here
+		current = current->next;
+		i++;
+	}
+	game->map.grid[i] = NULL;
+	return (SUCCESS);
 }
 
 void	print_game_data(t_game *game)
