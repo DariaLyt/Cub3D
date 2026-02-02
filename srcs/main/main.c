@@ -8,7 +8,6 @@ int	run_game(char *map_name, t_game *game)
 	init_game_struct(game);
 	if(parsing(map_name, game) == INVALID)
 		return(INVALID); // error and cleanup
-	printf("are we here?\n"); //printf debug
 	print_game_data(game); // << debug print // delete me when done
 	// execution();
 	return (0);

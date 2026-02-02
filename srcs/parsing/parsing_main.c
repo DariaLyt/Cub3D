@@ -47,12 +47,12 @@ int	parse_file(t_game *game, int fd)
 	count = 0;
 	while ((line = get_next_line(fd)))
 	{
-		if (is_empty_line(line) == SUCCESS)
+		if (is_empty_line(line))
 		{
 			free(line);
 			continue;
 		}
-		if (count < 4) // change 6 when rgb ready
+		if (count < 6) // change 6 when rgb ready
 		{
 			if (is_metadata(game, line) == SUCCESS)
 				count++;
@@ -63,7 +63,7 @@ int	parse_file(t_game *game, int fd)
 			add_to_map_list(game, line);
 		free(line);
 	}
-	if(count != 4) //change to 6 when rgb ready
+	if(count != 6) //change to 6 when rgb ready
 		return(INVALID);
 	return(SUCCESS);
 }
@@ -81,10 +81,11 @@ int	is_metadata(t_game *game, char *line)
 		return (save_path(&game->map.ea_path, trimmed + 3));
 	if (ft_strncmp(trimmed, "WE ", 3) == SUCCESS)
 		return (save_path(&game->map.we_path, trimmed + 3));
-	// if (ft_strncmp(trimmed, "F ", 2) == 0)
-	// save_color(255);
-	// if (ft_strncmp(trimmed, "C ", 2) == 0)
-	// save_color(255);
+	if (ft_strncmp(trimmed, "F ", 2) == SUCCESS)
+		return (save_color(&game->map.floor_col, trimmed + 1));
+	if (ft_strncmp(trimmed, "C ", 2) == SUCCESS)
+		return (save_color(&game->map.ceiling_col, trimmed + 1));
+	printf("metadata invalid\n");
 	free(line);
 	return (INVALID);
 }
@@ -123,9 +124,9 @@ int	save_path(char **dest, char *src)
 	return (SUCCESS);
 }
 
-int	save_color(char **dest, char *src)
+int	save_color(int *dest, char *src)
 {
-	return (INVALID);
+	return (SUCCESS);
 	// rgb requires a converter?
 }
 
@@ -140,6 +141,7 @@ int	add_to_map_list(t_game *game, char *line)
 		return (ALLOC_FAIL);
 	ft_lstadd_back(&(game->map.temp_list), new_node);
 	update_map_dims(&game->map, line);
+	// << check here for Max map limit
 	return (SUCCESS);
 }
 
@@ -173,33 +175,33 @@ int	is_valid_char(char c)
 	return (INVALID);
 }
 
-// int convert_list_to_grid(t_game *game)
-// {
-//     t_list  *current;
-//     int     i;
+int convert_list_to_grid(t_game *game)
+{
+    t_list  *current;
+    int     i;
 
-//     if (!game->map.temp_list)
-//         return (INVALID);
-//     // 1. Allocate the "rows" (height + 1 for the NULL terminator)
-//     game->map.grid = malloc(sizeof(char *) * (game->map.height + 1));
-//     if (!game->map.grid)
-//         return (ALLOC_FAIL);
+    if (!game->map.temp_list)
+        return (INVALID);
+    // 1. Allocate the "rows" (height + 1 for the NULL terminator)
+    game->map.grid = malloc(sizeof(char *) * (game->map.height + 1));
+    if (!game->map.grid)
+        return (ALLOC_FAIL);
     
-//     current = game->map.temp_list;
-//     i = 0;
-//     while (current)
-//     {
-//         // 2. Transfer the string pointer from the node to the grid
-//         // We use ft_strdup here to keep the grid independent of the list
-//         game->map.grid[i] = ft_strdup(current->content);
-//         if (!game->map.grid[i])
-//             return (ALLOC_FAIL); // You should ideally free previous rows here
-//         current = current->next;
-//         i++;
-//     }
-//     game->map.grid[i] = NULL;
-//     return (SUCCESS);
-// }
+    current = game->map.temp_list;
+    i = 0;
+    while (current)
+    {
+        // 2. Transfer the string pointer from the node to the grid
+        // We use ft_strdup here to keep the grid independent of the list
+        game->map.grid[i] = ft_strdup(current->content);
+        if (!game->map.grid[i])
+            return (ALLOC_FAIL); // You should ideally free previous rows here
+        current = current->next;
+        i++;
+    }
+    game->map.grid[i] = NULL;
+    return (SUCCESS);
+}
 
 void	print_game_data(t_game *game)
 {

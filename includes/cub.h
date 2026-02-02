@@ -27,6 +27,7 @@ void	update_map_dims(t_map *map, char *line);
 // Metadata
 int		is_metadata(t_game *game, char *line);
 int		save_path(char **dest, char *src);
+int	save_color(int *dest, char *src);
 
 // Map list
 int		add_to_map_list(t_game *game, char *line);

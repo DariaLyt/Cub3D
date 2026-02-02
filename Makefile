@@ -1,6 +1,6 @@
 # Compiler
 CC      := cc
-#CFLAGS  := -g -Wall -Wextra -Werror
+CFLAGS  := -g #-Wall -Wextra -Werror
 DFLAGS := -MMD -MP \
 		 -I includes \
 		 -I Libft/
