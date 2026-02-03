@@ -22,6 +22,7 @@ int	parsing(char *map_name, t_game *game)
 function to find the correct file
 do we need this one?
 */
+
 char	*find_file(char *map_name)
 {
 	char	*path_name;
@@ -158,7 +159,7 @@ int	add_to_map_list(t_game *game, char *line)
 		return (ALLOC_FAIL);
 	ft_lstadd_back(&(game->map.temp_list), new_node);
 	update_map_dims(&game->map, line);
-	// << check here for Max map limit
+	// << check here for Max map limit?
 	return (SUCCESS);
 }
 
@@ -199,7 +200,6 @@ int	convert_list_to_grid(t_game *game)
 
 	if (!game->map.temp_list)
 		return (INVALID);
-	// 1. Allocate the "rows" (height + 1 for the NULL terminator)
 	game->map.grid = malloc(sizeof(char *) * (game->map.height + 1));
 	if (!game->map.grid)
 		return (ALLOC_FAIL);
@@ -207,11 +207,9 @@ int	convert_list_to_grid(t_game *game)
 	i = 0;
 	while (current)
 	{
-		// 2. Transfer the string pointer from the node to the grid
-		// We use ft_strdup here to keep the grid independent of the list
 		game->map.grid[i] = ft_strdup(current->content);
 		if (!game->map.grid[i])
-			return (ALLOC_FAIL); // You should ideally free previous rows here
+			return (ALLOC_FAIL); // free?
 		current = current->next;
 		i++;
 	}

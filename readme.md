@@ -46,3 +46,7 @@ To do
 ====================
 • rgb parsing
 • map grid linked list to array
+
+Traps
+====================
+DDA algo, ray calculation
