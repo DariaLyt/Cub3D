@@ -1,11 +1,19 @@
 # Compiler
 CC      := cc
-CFLAGS  := -g #-Wall -Wextra -Werror
+#CFLAGS  := -g -Wall -Wextra -Werror
 DFLAGS := -MMD -MP \
 		 -I includes \
-		 -I Libft/
+		 -I Libft/ \
+		 -I MLX42/include
 # Directories
 OBJDIR  := objs
+
+LIBMLX = MLX42
+#GLFW_PATH = /Users/$(USER)/.brew/opt/glfw/lib/
+GLFW_PATH := /opt/homebrew/Cellar/glfw/3.4/lib/
+GLFW_INC := /opt/homebrew/Cellar/glfw/3.4/include/
+ # <- previous one is not working on my macos
+DFLAGS += -I $(GLFW_INC)
 
 LIBFT_DIR := Libft
 LIBFT_A := $(LIBFT_DIR)/libft.a
@@ -17,8 +25,10 @@ NAME    := cub3d
 SRC     := srcs/main/main.c \
            srcs/parsing/parsing_main.c \
 		   srcs/parsing/parsing_utils.c \
-		   srcs/parsing/parsing_checks.c
-
+		   srcs/parsing/parsing_checks.c \
+		   srcs/execution/execution.c \
+		   srcs/execution/movement.c \
+		   srcs/execution/render.c \
 
 # Object files
 OBJ     := $(SRC:srcs/%.c=$(OBJDIR)/%.o)
@@ -37,12 +47,25 @@ $(LIBFT_A):
 $(NAME): $(OBJ) $(LIBFT_A)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT_A) -o $(NAME)
 	@echo "$(CYAN)🚀 Built: $@$(RESET)"
+$(LIBMLX):
+	@echo "$(YELLOW)Cloning and building MLX42...$(NC)\n"
+	@git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX) 
+	@cd $(LIBMLX) && cmake -B build && cmake --build build -j4
+	@echo "$(GREEN)MLX42 successfully built!$(NC)\n"
 
-$(OBJDIR)/%.o: srcs/%.c
+$(LIBFT_A):
+	@make -s -C $(LIBFT_DIR)
+
+
+
+$(OBJDIR)/%.o: srcs/%.c | $(LIBMLX)
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(DFLAGS) -c $< -o $@
 	@echo "$(GREEN)🛠️  Compiled:$(RESET) $<"
 
+$(NAME): $(OBJ) $(LIBFT_A) $(LIBMLX)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBMLX)/build/libmlx42.a -lglfw -L"$(GLFW_PATH)" $(LIBFT_A) -o $(NAME)
+	@echo "$(CYAN)🚀 Built: $@$(RESET)"
 clean:
 	@rm -rf $(OBJDIR)
 	@make clean -s -C $(LIBFT_DIR)
@@ -51,6 +74,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@make fclean -s -C $(LIBFT_DIR)
+		@rm -rf $(LIBMLX)
 	@echo "$(YELLOW)🗑️  Removed Cub3d binary.$(RESET)"
 
 re: fclean all
