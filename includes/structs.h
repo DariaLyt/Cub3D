@@ -3,7 +3,7 @@
 
 typedef enum e_status
 {
-	SUCCESS = 0, // success always 0 or if checks will fail!
+	SUCCESS = 0, // success always 0 or "if" checks will fail!
 	INVALID = 1,
 	VALID = 2,
 	ALLOC_FAIL = 3,

@@ -33,30 +33,6 @@ void free_map(t_game *game)
 	free(game->map.we_path);
 }
 
-int is_space(char c)
-{
-	int i = 0;
-
-	if(c == ' ' || (c >= 9 && c <= 13))
-		return 1;
-	else 
-		return 0;
-}
-
-int is_empty_line(char *str)
-{
-	int i = 0;
-
-	while(str[i])
-	{
-		if (str[i] != ' ' && str[i] != '\n' && str[i] != '\t')
-            return (0);
-		i++;
-	}
-	if(i > 0)
-		return 1;
-	return 0;
-}
 
 char *skip_spaces(char *str)
 {
@@ -67,15 +43,4 @@ char *skip_spaces(char *str)
 	return(str);
 }
 
-int is_xpm(char *path)
-{
-    int len;
 
-    len = ft_strlen(path);
-    if (len < 5)
-        return (0);
-    // Check if the last 4 characters match ".xpm"
-    if (ft_strncmp(path + len - 4, ".xpm", 4) == 0)
-        return (1);
-    return (0);
-}

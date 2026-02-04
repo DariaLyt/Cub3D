@@ -26,9 +26,11 @@ SRC     := srcs/main/main.c \
            srcs/parsing/parsing_main.c \
 		   srcs/parsing/parsing_utils.c \
 		   srcs/parsing/parsing_checks.c \
-		   srcs/execution/execution.c \
-		   srcs/execution/movement.c \
-		   srcs/execution/render.c \
+		   srcs/parsing/parsing_files.c \
+		   srcs/parsing/parsing_map.c \
+		   #srcs/execution/execution.c \
+		   #srcs/execution/movement.c \
+		   #srcs/execution/render.c \
 
 # Object files
 OBJ     := $(SRC:srcs/%.c=$(OBJDIR)/%.o)
