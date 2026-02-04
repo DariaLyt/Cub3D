@@ -23,10 +23,11 @@ NAME    := cub3d
 
 # Source files
 SRC     := srcs/main/main.c \
-           srcs/parsing/parsing_main.c \
-		   srcs/parsing/parsing_utils.c \
+           srcs/parsing/00_parsing_main.c \
+		   srcs/parsing/01_parsing_file.c \
+		   srcs/parsing/02_parsing_meta.c \
+		   srcs/parsing/03_parsing_utils.c \
 		   srcs/parsing/parsing_checks.c \
-		   srcs/parsing/parsing_files.c \
 		   srcs/parsing/parsing_map.c \
 		   #srcs/execution/execution.c \
 		   #srcs/execution/movement.c \
