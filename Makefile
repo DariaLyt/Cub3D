@@ -26,9 +26,9 @@ SRC     := srcs/main/main.c \
            srcs/parsing/00_parsing_main.c \
 		   srcs/parsing/01_parsing_file.c \
 		   srcs/parsing/02_parsing_meta.c \
-		   srcs/parsing/03_parsing_utils.c \
+		   srcs/parsing/03_parsing_map.c \
 		   srcs/parsing/parsing_checks.c \
-		   srcs/parsing/parsing_map.c \
+		   srcs/parsing/parsing_utils.c \
 		   #srcs/execution/execution.c \
 		   #srcs/execution/movement.c \
 		   #srcs/execution/render.c \
