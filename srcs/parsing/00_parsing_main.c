@@ -40,7 +40,7 @@ int	fill_map_struct(t_game *game, char *map_name)
 	}
 	close(fd);
 	convert_list_to_grid(game);
-	// convert list to **grid here
+	ft_lstclear(&game->map.temp_list, free);
 	// clean temp list here // check libft
 	return (SUCCESS);
 }

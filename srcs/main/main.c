@@ -10,6 +10,7 @@ int	run_game(char *map_name, t_game *game)
 		return(INVALID); // error and cleanup
 	print_game_data(game); // << debug print // delete me when done
 	// execution();
+	free_map(game);
 	return (0);
 }
 
