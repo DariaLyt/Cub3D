@@ -3,7 +3,7 @@ CC      := cc
 #CFLAGS  := -g -Wall -Wextra -Werror
 DFLAGS := -MMD -MP \
 		 -I includes \
-		 -I Libft/ \
+		 -I Libft \
 		 -I MLX42/include
 # Directories
 OBJDIR  := objs
@@ -23,13 +23,22 @@ NAME    := cub3d
 
 # Source files
 SRC     := srcs/main/main.c \
-           srcs/parsing/parsing_main.c \
-		   srcs/parsing/parsing_utils.c \
+           srcs/parsing/00_parsing_main.c \
+		   srcs/parsing/01_parsing_file.c \
+		   srcs/parsing/02_parsing_meta.c \
+		   srcs/parsing/03_parsing_map.c \
 		   srcs/parsing/parsing_checks.c \
+<<<<<<< HEAD
+		   srcs/parsing/parsing_utils.c \
+		   #srcs/execution/execution.c \
+		   #srcs/execution/movement.c \
+		   #srcs/execution/render.c \
+=======
 		   srcs/execution/execution.c \
 		   srcs/execution/movement.c \
 		   srcs/execution/render.c \
 		   srcs/execution/minimap.c \
+>>>>>>> dev
 
 # Object files
 OBJ     := $(SRC:srcs/%.c=$(OBJDIR)/%.o)
@@ -50,7 +59,7 @@ all: $(NAME)
 # 	@echo "$(CYAN)🚀 Built: $@$(RESET)"
 $(LIBMLX):
 	@echo "$(YELLOW)Cloning and building MLX42...$(NC)\n"
-	@git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX) 
+	@git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX)
 	@cd $(LIBMLX) && cmake -B build && cmake --build build -j4
 	@echo "$(GREEN)MLX42 successfully built!$(NC)\n"
 

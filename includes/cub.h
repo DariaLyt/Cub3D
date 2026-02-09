@@ -1,7 +1,7 @@
 #ifndef CUB_H
 # define CUB_H
 
-# include "../Libft/libft.h"
+# include "libft.h"
 //# include "../MLX42/include/MLX42/MLX42.h"
 # include "MLX42/MLX42.h"
 # include "structs.h"
@@ -25,6 +25,7 @@ int		run_game(char *map_name, t_game *game);
 // Map parsing
 int		parsing(char *map_name, t_game *game);
 int		parse_file(t_game *game, int fd);
+int		convert_list_to_grid(t_game *game);
 
 // Map Validity check
 int		is_valid_map_line(char *line);

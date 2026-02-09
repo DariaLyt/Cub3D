@@ -31,9 +31,14 @@ int	run_game(char *map_name, t_game *game)
 	if(parsing(map_name, game) == INVALID)
 		return(INVALID); // error and cleanup
 	print_game_data(game); // << debug print // delete me when done
+	// execution();
 	if (!execution(game))
+	{
+		free_map(game);
 		return (INVALID);
-	return (0);
+	}
+		free_map(game);
+		return (0);
 }
 
 int	main(int argc, char **argv)
