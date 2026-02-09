@@ -2,12 +2,22 @@
 # define CUB_H
 
 # include "../Libft/libft.h"
+//# include "../MLX42/include/MLX42/MLX42.h"
+# include "MLX42/MLX42.h"
 # include "structs.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+
+# define MIN_WIDTH 384
+# define MIN_HEIGHT 216
+# define MINIMAP_SCALE 0.15
+# define TILE_SIZE 64
+# define STEP_SIZE 0.5
+# define MINIMAP_SCALE 0.15
 
 // Main
 int		run_game(char *map_name, t_game *game);
@@ -40,8 +50,6 @@ char	*skip_spaces(char *str);
 char	*ft_strjoin_and_free(char *map_whole, char *line);
 int		is_valid_char(char c);
 
-// Execution
-
 // Cleanup
 void	free_map(t_game *game);
 
@@ -52,4 +60,14 @@ void	free_map(t_game *game);
 // Debug
 void	print_game_data(t_game *game);
 
+// Execution
+int init_game(t_game *game);
+
+// *movement
+void    handle_movement(t_game *game);
+int movement_delta(t_game *game, double *x, double *y);
+
+// *render
+void    render(t_game *game);
+void draw_minimap(t_game *game);
 #endif
