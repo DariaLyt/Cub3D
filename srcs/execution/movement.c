@@ -10,7 +10,7 @@ void    handle_movement(t_game *game)
         game->player_moving = false;
         return ;
     }
-   // player_move(game, x, y);
+//    player_move(game, x, y);
 }
 
 int movement_delta(t_game *game, double *x, double *y)

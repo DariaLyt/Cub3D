@@ -1,5 +1,27 @@
 #include "cub.h"
 
+void	game_loop(void *data)
+{
+	t_game *game;
+	game = (t_game *)data;
+	//handle_movement(game);
+	render(game);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(game->mlx);
+}
+
+int execution(t_game *game)
+{
+	if (!init_game(game))
+        return (0);
+    mlx_image_to_window(game->mlx, game->image, 0, 0);
+    mlx_loop_hook(game->mlx, game_loop, game);
+    mlx_loop(game->mlx);
+    mlx_terminate(game->mlx);
+    ft_putstr_fd("Hello world!", 1);
+	return (1);
+}
+
 int	run_game(char *map_name, t_game *game)
 {
 	// game = malloc(sizeof(t_game));
@@ -9,7 +31,8 @@ int	run_game(char *map_name, t_game *game)
 	if(parsing(map_name, game) == INVALID)
 		return(INVALID); // error and cleanup
 	print_game_data(game); // << debug print // delete me when done
-	// execution();
+	if (!execution(game))
+		return (INVALID);
 	return (0);
 }
 
