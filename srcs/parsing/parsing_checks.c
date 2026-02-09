@@ -51,7 +51,7 @@ int	is_valid_map_line(char *line)
 
 int	is_valid_char(char c)
 {
-	if (c == '0' || c == '1' || c == ' ' || c == '\n')
+	if (c == '0' || c == '1' || c == ' ' || c == '\n' || c == 'N' || c == 'E' || c == 'S' || c == 'W')
 		return (SUCCESS);
 	return (INVALID);
 }
