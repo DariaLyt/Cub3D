@@ -1,5 +1,5 @@
-#ifndef STRUCTS_H
-#define STRUCTS_H
+#ifndef STR_H
+#define STR_H
 
 # include "cub.h"
 

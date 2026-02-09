@@ -1,6 +1,5 @@
 #include "cub.h"
 
-
 int    init_test_map(t_game *game)
 {
     game->map.grid = ft_calloc(7, sizeof (char *));
