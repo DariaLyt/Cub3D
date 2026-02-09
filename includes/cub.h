@@ -14,10 +14,13 @@
 
 # define MIN_WIDTH 384
 # define MIN_HEIGHT 216
-# define MINIMAP_SCALE 0.15
+# define MINIMAP_SCALE 16
 # define TILE_SIZE 64
 # define STEP_SIZE 0.5
-# define MINIMAP_SCALE 0.15
+
+# define WHITE_COLOR 0xFFFFFFFF
+# define BLACK_COLOR 0x000000
+
 
 // Main
 int		run_game(char *map_name, t_game *game);

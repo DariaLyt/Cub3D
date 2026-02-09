@@ -39,19 +39,19 @@ int init_mlx(t_game *game)
 
 int init_game(t_game *game)
 {
-    init_test_map(game);
+    //init_test_map(game);
     game->player.speed = 0.025;
     game->player.angle = 0; // <- based on N S W E
-    game->floor = 14443520; // turned rgb in int (need to make function for this);
-    game->ceiling = 65535;
+    game->floor = BLACK_COLOR; // turned rgb in int (need to make function for this);
+    game->ceiling = WHITE_COLOR;
     if (!init_mlx(game))
         return (0);
     int i = 0;
-    while (i < game->map.height)
-    {
-        ft_printf("%s\n", game->map.grid[i]);
-        i++;
-    }
+    // while (i < game->map.height)
+    // {
+    //     ft_printf("%s\n", game->map.grid[i]);
+    //     i++;
+    // }
     game->image = mlx_new_image(game->mlx, game->width, game->width);
     if (!game->image)
     {
