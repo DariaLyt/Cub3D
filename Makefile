@@ -28,17 +28,11 @@ SRC     := srcs/main/main.c \
 		   srcs/parsing/02_parsing_meta.c \
 		   srcs/parsing/03_parsing_map.c \
 		   srcs/parsing/parsing_checks.c \
-<<<<<<< HEAD
 		   srcs/parsing/parsing_utils.c \
-		   #srcs/execution/execution.c \
-		   #srcs/execution/movement.c \
-		   #srcs/execution/render.c \
-=======
 		   srcs/execution/execution.c \
 		   srcs/execution/movement.c \
 		   srcs/execution/render.c \
 		   srcs/execution/minimap.c \
->>>>>>> dev
 
 # Object files
 OBJ     := $(SRC:srcs/%.c=$(OBJDIR)/%.o)
