@@ -1,7 +1,5 @@
 #include "cub.h"
 
-int	convert_list_to_grid(t_game *game);
-
 /*
 1. setup the direction textures
 2. parse texture also initiliazes
@@ -20,11 +18,6 @@ int	parsing(char *map_name, t_game *game)
 	return (SUCCESS);
 }
 
-/*
-function to find the correct file
-do we need this one?
-*/
-
 int	fill_map_struct(t_game *game, char *map_name)
 {
 	int	fd;
@@ -41,7 +34,7 @@ int	fill_map_struct(t_game *game, char *map_name)
 	close(fd);
 	convert_list_to_grid(game);
 	ft_lstclear(&game->map.temp_list, free);
-	// clean temp list here // check libft
+	// floodfill
 	return (SUCCESS);
 }
 

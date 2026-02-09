@@ -42,6 +42,15 @@ int	save_path(char **dest, char *src)
 
 int	save_color(int *dest, char *src)
 {
+	char **rgb;
+	int r;
+	int g;
+	int b;
+
+	// if(*dest != -1)
+		// return(INVALID);
 	return (SUCCESS);
+
+
 	// rgb requires a converter?
 }

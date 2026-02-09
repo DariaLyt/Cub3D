@@ -43,4 +43,3 @@ int	parse_file(t_game *game, int fd)
 		return (INVALID);
 	return (SUCCESS);
 }
-

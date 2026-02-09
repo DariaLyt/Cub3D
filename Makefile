@@ -3,7 +3,7 @@ CC      := cc
 #CFLAGS  := -g -Wall -Wextra -Werror
 DFLAGS := -MMD -MP \
 		 -I includes \
-		 -I Libft/ \
+		 -I Libft \
 		 -I MLX42/include
 # Directories
 OBJDIR  := objs
@@ -52,7 +52,7 @@ $(NAME): $(OBJ) $(LIBFT_A)
 	@echo "$(CYAN)🚀 Built: $@$(RESET)"
 $(LIBMLX):
 	@echo "$(YELLOW)Cloning and building MLX42...$(NC)\n"
-	@git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX) 
+	@git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX)
 	@cd $(LIBMLX) && cmake -B build && cmake --build build -j4
 	@echo "$(GREEN)MLX42 successfully built!$(NC)\n"
 

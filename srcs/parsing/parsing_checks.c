@@ -1,5 +1,9 @@
 #include "cub.h"
 
+
+/*
+	Currently not used
+*/
 int is_xpm(char *path)
 {
     int len;
@@ -7,7 +11,6 @@ int is_xpm(char *path)
     len = ft_strlen(path);
     if (len < 5)
         return (0);
-    // Check if the last 4 characters match ".xpm"
     if (ft_strncmp(path + len - 4, ".xpm", 4) == 0)
         return (1);
     return (0);

@@ -11,16 +11,15 @@ char	*ft_strjoin_and_free(char *map_whole, char *line)
 		free(line);
 	return (result);
 }
- 
-void free_map(t_game *game)
-{
-	int i;
 
-	if(game->map.grid)
+void	free_map(t_game *game)
+{
+	int	i;
+
+	if (game->map.grid)
 	{
 		i = 0;
-
-		while(game->map.grid[i])
+		while (game->map.grid[i])
 		{
 			free(game->map.grid[i]);
 			i++;
@@ -33,14 +32,11 @@ void free_map(t_game *game)
 	free(game->map.we_path);
 }
 
-
-char *skip_spaces(char *str)
+char	*skip_spaces(char *str)
 {
-	if(!str)
+	if (!str)
 		return (NULL);
-	while(*str == ' ' || *str == '\t')
-			str++;
-	return(str);
+	while (*str == ' ' || *str == '\t')
+		str++;
+	return (str);
 }
-
-
