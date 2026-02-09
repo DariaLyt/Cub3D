@@ -1,9 +1,6 @@
 #include "cub.h"
 
-
-/*
-	Currently not used
-*/
+	// Currently not used
 int is_xpm(char *path)
 {
     int len;
