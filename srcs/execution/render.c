@@ -19,14 +19,15 @@ void    draw_floor_ceiling(t_game *game)
         h++;
     }
 }
-// void    draw_walls(game)
-// {
-
-// }
+void    draw_walls(game)
+{
+    
+}
 
 void    render(t_game *game)
 {
     draw_floor_ceiling(game);
     draw_minimap(game);
-  //  draw_walls(game);
+    draw_player(game);
+    //draw_walls(game);
 }

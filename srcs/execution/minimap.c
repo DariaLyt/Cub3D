@@ -51,9 +51,43 @@ void draw_minimap(t_game *game)
             {
                 game->mini_color = 16400995;
             }
+            // if (game->map.grid[y][x] == 'E')
+            // {
+            //     game->player.pos_x = x;
+            //     game->player.pos_y = y;
+            // }
             draw_mini_square(game, screen_x, screen_y, MINIMAP_SCALE);
             x++;
         }
         y++;
     }
+    //printf("\npllayer x = %f, y = %f", game->player.pos_x, game->player.pos_y);
+}
+
+void    draw_player(t_game *game)
+{
+    int x;
+    int y;
+    int size;
+    int i;
+    int j;
+
+    x = (int)(game->player.pos_x * MINIMAP_SCALE);
+    y = (int)(game->player.pos_y * MINIMAP_SCALE);
+    size = 5;
+    i = -size / 2;
+    while (i <= size/2)
+    {
+        j = -size/2;
+        while(j <= size/2)
+        {
+            if (x+i >= 0 && x + i < game->width && y+ j >= 0 && y + j < game->height)
+            {
+                mlx_put_pixel(game->image, x + i, y + j, mk_col(255,0,0));
+            }
+            j++;
+        }
+        i++;
+    }
+
 }

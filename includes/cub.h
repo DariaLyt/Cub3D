@@ -20,6 +20,7 @@
 
 # define WHITE_COLOR 0xFFFFFFFF
 # define BLACK_COLOR 0x000000
+# define COLLISION 0.15
 
 
 // Main
@@ -74,4 +75,5 @@ int movement_delta(t_game *game, double *x, double *y);
 // *render
 void    render(t_game *game);
 void draw_minimap(t_game *game);
+void    draw_player(t_game *game);
 #endif
