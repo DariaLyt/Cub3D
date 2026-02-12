@@ -72,6 +72,9 @@ typedef struct s_game
 	bool 	player_moving;
 	bool	game_running;
 
+	bool	is_resizing;
+	int	new_w;
+	int new_h;
 
 	t_map	map;
 	// struct s_texture	*texture;

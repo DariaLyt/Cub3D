@@ -6,6 +6,7 @@ void	game_loop(void *data)
 	game = (t_game *)data;
 	render(game);
 	handle_movement(game);
+	handle_rotation(game);
 
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);

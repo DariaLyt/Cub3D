@@ -1,5 +1,31 @@
 #include "cub.h"
 
+void draw_minimap_rays(t_game *game)
+{   
+    double ray_x;
+    double ray_y;
+    double x;
+    double y;
+    double angle;
+
+    angle = game->player.angle;;
+    while(angle <= (game->player.angle))
+    {
+        ray_x = game->player.pos_x;
+        ray_y = game->player.pos_y;
+        while (!is_wall(game, ray_x, ray_y))
+        {
+            ray_x += cos(angle) * STEP_SIZE;
+            ray_y += sin(angle) * STEP_SIZE;
+            x = ray_x * MINIMAP_SCALE;
+            y = ray_y * MINIMAP_SCALE;
+            if (x >= 0 && x < game->width && y >= 0 && y < game->height)
+                mlx_put_pixel(game->image, (int)x, (int)y, mk_col(255,0,0));
+        }
+        angle += 0.001;
+    }
+}
+
 void draw_mini_square(t_game *game, int x, int y, int size)
 {
     int i;

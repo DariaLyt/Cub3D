@@ -33,6 +33,7 @@ SRC     := srcs/main/main.c \
 		   srcs/execution/movement.c \
 		   srcs/execution/render.c \
 		   srcs/execution/minimap.c \
+		   srcs/execution/rotation.c \
 
 # Object files
 OBJ     := $(SRC:srcs/%.c=$(OBJDIR)/%.o)
