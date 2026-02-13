@@ -81,5 +81,5 @@ void draw_minimap(t_game *game);
 void    draw_player(t_game *game);
 uint32_t mk_col(unsigned char r, unsigned char g, unsigned char b);
 void draw_minimap_rays(t_game *game);
-
+void    draw_walls(t_game *game);
 #endif

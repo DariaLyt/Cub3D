@@ -19,10 +19,6 @@ void    draw_floor_ceiling(t_game *game)
         h++;
     }
 }
-void    draw_walls(game)
-{
-    
-}
 
 void    resize_call(int width, int height, void *data)
 {
@@ -60,10 +56,11 @@ void    render(t_game *game)
 		game->player.speed = (double)game->height * SPEED;
 		game->is_resizing = false;
 	}
-
+   // draw_walls(game);
     draw_floor_ceiling(game);
+    draw_walls(game);
     draw_minimap(game);
     draw_player(game);
     draw_minimap_rays(game);
-    //draw_walls(game);
+
 }
