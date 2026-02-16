@@ -1,5 +1,7 @@
 #include "cub.h"
 
+void    player_move(t_game *game, double x, double y);
+
 void    handle_movement(t_game *game)
 {
     double  x;
@@ -8,13 +10,15 @@ void    handle_movement(t_game *game)
     if (!movement_delta(game, &x, &y))
     {
         game->player_moving = false;
+         //printf("player x = %f, y = %f\n", game->player.pos_x, game->player.pos_y);
         return ;
     }
-//    player_move(game, x, y);
+    player_move(game, x, y);
 }
 
 int movement_delta(t_game *game, double *x, double *y)
 {
+    //printf("player x = %f, y = %f\n", game->player.pos_x, game->player.pos_y);
     if (mlx_is_key_down(game->mlx, MLX_KEY_W))
     {
         *x = cos(game->player.angle) * game->player.speed;
@@ -40,6 +44,47 @@ int movement_delta(t_game *game, double *x, double *y)
     return (1);
 }
 
+int is_wall(t_game *game, double x, double y)
+{
+    char    tile;
+    int nx;
+    int ny;
+
+    nx = (int)x;
+    ny = (int)y;
+    if (ny < 0 || ny >= game->map.height)
+        return (1);
+    if (nx < 0 || nx >= game->map.width)
+        return (1);
+    if (game->map.grid[ny][nx] == '1')
+        return (1);
+    return (0);
+}
+
+int can_move(t_game *game, double x, double y)
+{
+    double diagonal;
+
+    diagonal = COLLISION / sqrt(2);
+    if (is_wall(game, x + COLLISION, y))
+        return (0);
+    if (is_wall(game, x, y + COLLISION))
+        return (0);
+    if (is_wall(game, x - COLLISION, y))
+        return (0);
+    if (is_wall(game, x, y - COLLISION))
+        return (0);
+    if (is_wall(game, x + diagonal, y + diagonal))
+        return (0);
+    if (is_wall(game, x - diagonal, y + diagonal))
+        return (0);
+    if (is_wall(game, x + diagonal, y - diagonal))
+        return (0);
+    if (is_wall(game, x - diagonal, y - diagonal))
+        return (0);
+    return (1);
+}
+
 void    player_move(t_game *game, double x, double y)
 {
     double old_x;
@@ -47,5 +92,27 @@ void    player_move(t_game *game, double x, double y)
 
     old_x = game->player.pos_x;
     old_y = game->player.pos_y;
-   // if ()
+    printf("player x = %f, y = %f\n", game->player.pos_x, game->player.pos_y);
+    if (can_move(game, x + old_x, y + old_y))
+    {
+        printf("\ncan move 1\n");
+        game->player.pos_x = x + old_x;
+        game->player.pos_y = y + old_y;
+        game->player_moving = true;
+    }
+    else
+    {
+        if (can_move(game, x + old_x, old_y))
+        {
+            printf("\ncan move 2\n");
+            game->player.pos_x = x + old_x;
+            game->player_moving = true;
+        }
+        if (can_move(game, old_x, y + old_y))
+        {
+            printf("\ncan move 2\n");
+            game->player.pos_y = y + old_y;
+            game->player_moving = true;
+        }
+    }
 }
