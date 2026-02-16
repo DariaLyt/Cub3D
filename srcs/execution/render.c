@@ -56,7 +56,6 @@ void    render(t_game *game)
 		game->player.speed = (double)game->height * SPEED;
 		game->is_resizing = false;
 	}
-   // draw_walls(game);
     draw_floor_ceiling(game);
     draw_walls(game);
     draw_minimap(game);

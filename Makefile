@@ -9,11 +9,11 @@ DFLAGS := -MMD -MP \
 OBJDIR  := objs
 
 LIBMLX = MLX42
-GLFW_PATH = /Users/$(USER)/.brew/opt/glfw/lib/
-# GLFW_PATH := /opt/homebrew/Cellar/glfw/3.4/lib/
-# GLFW_INC := /opt/homebrew/Cellar/glfw/3.4/include/
+#GLFW_PATH = /Users/$(USER)/.brew/opt/glfw/lib/
+ GLFW_PATH := /opt/homebrew/Cellar/glfw/3.4/lib/
+  GLFW_INC := /opt/homebrew/Cellar/glfw/3.4/include/
  # <- previous one is not working on my macos
-#DFLAGS += -I $(GLFW_INC)
+DFLAGS += -I $(GLFW_INC)
 
 LIBFT_DIR := Libft
 LIBFT_A := $(LIBFT_DIR)/libft.a
