@@ -43,7 +43,7 @@ int	parse_file(t_game *game, int fd)
 			add_to_map_list(game, line);
 		free(line);
 	}
-	if (count != 6)
+	if (count != 6) // << more rigorous
 	{
 		printf("Metadata missing\n");
 		return (INVALID);

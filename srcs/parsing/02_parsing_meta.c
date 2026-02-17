@@ -14,9 +14,9 @@ int	is_metadata(t_game *game, char *line)
 	if (ft_strncmp(trimmed, "WE ", 3) == SUCCESS)
 		return (save_path(&game->map.we_path, trimmed + 3));
 	if (ft_strncmp(trimmed, "F ", 2) == SUCCESS)
-		return (save_color(&game->map.floor_col, trimmed + 1));
+		return (save_color(&game->map.floor_col, trimmed + 2));
 	if (ft_strncmp(trimmed, "C ", 2) == SUCCESS)
-		return (save_color(&game->map.ceiling_col, trimmed + 1));
+		return (save_color(&game->map.ceiling_col, trimmed + 2));
 	printf("metadata invalid\n");
 	free(line);
 	return (INVALID);
@@ -40,17 +40,45 @@ int	save_path(char **dest, char *src)
 	return (SUCCESS);
 }
 
+static int assign_rgb(char *rgb)
+{
+	char *color;
+	int i = 0;
+
+	while(rgb[i])
+	{
+		if(rgb[i] > 0 && rgb[i] < 9)
+			color[i] = rgb[i];
+		if(rgb[i] == ',')
+			break;
+		else
+			return(INVALID);
+		i++;
+	}
+	return(ft_atoi(color));
+}
+
 int	save_color(int *dest, char *src)
 {
-	char **rgb;
-	int r;
-	int g;
-	int b;
+	char *path;
+	int r = 0;
+	int g = 0;
+	int b = 0;
 
-	// if(*dest != -1)
-		// return(INVALID);
+	if(*dest != -1)
+		return(INVALID);
+	path = ft_strtrim(src, " \n\t");
+	if(!path)
+		return(INVALID);
+	if(path[0] == '\0')
+	{
+		free(path);
+		return(INVALID);
+	}
+	r = assign_rgb(path);
+	g = assign_rgb(path);
+	b = assign_rgb(path);
+	*dest = mk_col(r, g, b);
+	printf("save colour debug\n");
 	return (SUCCESS);
-
-
-	// rgb requires a converter?
 }
