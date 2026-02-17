@@ -17,8 +17,6 @@ int	is_metadata(t_game *game, char *line)
 		return (save_color(&game->map.floor_col, trimmed + 2));
 	if (ft_strncmp(trimmed, "C ", 2) == SUCCESS)
 		return (save_color(&game->map.ceiling_col, trimmed + 2));
-	printf("metadata invalid\n");
-	free(line);
 	return (INVALID);
 }
 
@@ -61,9 +59,7 @@ static int assign_rgb(char *rgb)
 int	save_color(int *dest, char *src)
 {
 	char *path;
-	int r = 0;
-	int g = 0;
-	int b = 0;
+	int r, g, b;
 
 	if(*dest != -1)
 		return(INVALID);
@@ -78,6 +74,7 @@ int	save_color(int *dest, char *src)
 	r = assign_rgb(path);
 	g = assign_rgb(path);
 	b = assign_rgb(path);
+	printf("r:%d g:%d b:%d \n", r, g ,b);
 	*dest = mk_col(r, g, b);
 	printf("save colour debug\n");
 	return (SUCCESS);
