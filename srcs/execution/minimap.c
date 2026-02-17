@@ -77,11 +77,6 @@ void draw_minimap(t_game *game)
             {
                 game->mini_color = 16400995;
             }
-            // if (game->map.grid[y][x] == 'E')
-            // {
-            //     game->player.pos_x = x;
-            //     game->player.pos_y = y;
-            // }
             draw_mini_square(game, screen_x, screen_y, MINIMAP_SCALE);
             x++;
         }
