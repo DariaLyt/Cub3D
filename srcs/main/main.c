@@ -4,8 +4,10 @@ void	game_loop(void *data)
 {
 	t_game *game;
 	game = (t_game *)data;
-	//handle_movement(game);
 	render(game);
+	handle_movement(game);
+	handle_rotation(game);
+
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 }
@@ -15,6 +17,8 @@ int execution(t_game *game)
 	if (!init_game(game))
         return (0);
     mlx_image_to_window(game->mlx, game->image, 0, 0);
+	game->player.pos_x= 26;
+	game->player.pos_y = 11;
     mlx_loop_hook(game->mlx, game_loop, game);
     mlx_loop(game->mlx);
     mlx_terminate(game->mlx);

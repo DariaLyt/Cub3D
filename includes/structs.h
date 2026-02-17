@@ -33,9 +33,21 @@ typedef struct s_wall
 	int original_start;
 	int original_end;
 	int visible_start;
-	int visble_end;
+	int visible_end;
 	int height;
 }	t_wall;
+
+typedef struct s_dda
+{
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	double	delta_x;
+	double	delta_y;
+	double	side_x;
+	double	side_y;
+}	t_dda;
 
 typedef struct s_player
 {
@@ -52,6 +64,8 @@ typedef	struct s_ray
 	double dir_y;
 	double hit_x;
 	double hit_y;
+	int side;
+	double wall_x;
 }	t_ray;
 
 typedef struct s_game
@@ -72,6 +86,9 @@ typedef struct s_game
 	bool 	player_moving;
 	bool	game_running;
 
+	bool	is_resizing;
+	int	new_w;
+	int new_h;
 
 	t_map	map;
 	// struct s_texture	*texture;

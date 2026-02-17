@@ -9,11 +9,11 @@ DFLAGS := -MMD -MP \
 OBJDIR  := objs
 
 LIBMLX = MLX42
-GLFW_PATH = /Users/$(USER)/.brew/opt/glfw/lib/
-# GLFW_PATH := /opt/homebrew/Cellar/glfw/3.4/lib/
-# GLFW_INC := /opt/homebrew/Cellar/glfw/3.4/include/
+#GLFW_PATH = /Users/$(USER)/.brew/opt/glfw/lib/
+ GLFW_PATH := /opt/homebrew/Cellar/glfw/3.4/lib/
+  GLFW_INC := /opt/homebrew/Cellar/glfw/3.4/include/
  # <- previous one is not working on my macos
-#DFLAGS += -I $(GLFW_INC)
+DFLAGS += -I $(GLFW_INC)
 
 LIBFT_DIR := Libft
 LIBFT_A := $(LIBFT_DIR)/libft.a
@@ -28,17 +28,13 @@ SRC     := srcs/main/main.c \
 		   srcs/parsing/02_parsing_meta.c \
 		   srcs/parsing/03_parsing_map.c \
 		   srcs/parsing/parsing_checks.c \
-<<<<<<< HEAD
 		   srcs/parsing/parsing_utils.c \
-		   #srcs/execution/execution.c \
-		   #srcs/execution/movement.c \
-		   #srcs/execution/render.c \
-=======
 		   srcs/execution/execution.c \
 		   srcs/execution/movement.c \
 		   srcs/execution/render.c \
 		   srcs/execution/minimap.c \
->>>>>>> dev
+		   srcs/execution/rotation.c \
+		   srcs/execution/walls.c \
 
 # Object files
 OBJ     := $(SRC:srcs/%.c=$(OBJDIR)/%.o)
