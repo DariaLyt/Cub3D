@@ -94,53 +94,8 @@ void    calculate_ray(t_game *game, double ray)
    init_dda(game, ray, &dda);
    perform_dda(game, &dda);
    compute_hit(game, ray, &dda);
-}
-
-int select_texture_x(t_ray *ray)
-{
-    int x;
-
-    x = ray->wall_x * ray->textures->width;
-    if (x >= (int)ray->textures->width)
-        x = ray->textures->width - 1;
-    return (x);
-}
-
-int select_texture_y(t_game *game, int y)
-{
-    int height;
-    int wall_height;
-    int texture_y;
-    int i;
-
-    i = y - game->wall.original_start;
-    height = game->ray.textures->height;
-    wall_height = game->wall.height;
-    texture_y = (i * height) / wall_height;
-    if (texture_y >= height)
-        texture_y = height - 1;
-    return (texture_y);
-}
-
-void draw_wall_texture(t_game *game, int x)
-{
-    int y;
-    int texture_x;
-    int texture_y;
-    uint32_t color;
-
-    texture_x = select_texture_x(&game->ray);
-    y = game->wall.visible_start;
-    while (y <= game->wall.visible_end)
-    {
-        texture_y = select_texture_y(game, y);
-        // color = pixel color from texture;
-        mlx_put_pixel(game->image, x, y, color);
-        y++;
-    }
-    /*
-        the function should look what direction it is NO SO EA WE and select right texture
-    */
+   game->ray.texture = get_texture(game);
+   //printf("abcd\n");
 }
 
 void    draw_wall_tile(t_game *game, double ray, int x)
@@ -158,15 +113,16 @@ void    draw_wall_tile(t_game *game, double ray, int x)
         game->wall.visible_start = 0;
     if (game->wall.visible_end >= game->height)
         game->wall.visible_end = game->height - 1;
-    int j = game->wall.visible_start;
+   // int j = game->wall.visible_start;
 
     draw_wall_texture(game, x);
-    while (j <= game->wall.visible_end)
-    {
-        mlx_put_pixel(game->image, x, j, mk_col(255, 0, 255));
-        j++;
-    }
+    // while (j <= game->wall.visible_end)
+    // {
+    //     mlx_put_pixel(game->image, x, j, mk_col(255, 0, 255));
+    //     j++;
+    // }
 }
+
 
 void    draw_walls(t_game *game)
 {

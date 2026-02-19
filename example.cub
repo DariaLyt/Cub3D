@@ -1,7 +1,7 @@
-NO ./textures/north256.xpm
-SO ./textures/south256.xpm
-WE ./textures/west256.xpm
-EA ./textures/east256.xpm
+NO ./textures/Bark.png
+SO ./textures/bookshelf.png
+WE ./textures/BrickOv.png
+EA ./textures/Bricks.png
 
 F 220,100,0
 C 225,30,0
