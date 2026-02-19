@@ -66,6 +66,7 @@ typedef	struct s_ray
 	double hit_y;
 	int side;
 	double wall_x;
+	mlx_texture_t	*textures;
 }	t_ray;
 
 typedef struct s_game

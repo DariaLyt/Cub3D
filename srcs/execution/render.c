@@ -11,9 +11,9 @@ void    draw_floor_ceiling(t_game *game)
         while (w < game->width)
         {
             if (h < game->height / 2)
-                mlx_put_pixel(game->image, w, h, game->ceiling);
+                mlx_put_pixel(game->image, w, h, game->map.floor_col);
             else
-                mlx_put_pixel(game->image, w, h, game->floor);
+                mlx_put_pixel(game->image, w, h, game->map.ceiling_col);
             w++;
         }
         h++;
