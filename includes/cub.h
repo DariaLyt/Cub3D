@@ -75,10 +75,13 @@ int			is_wall(t_game *game, double x, double y);
 void		handle_rotation(t_game *game);
 
 // *render
-void		render(t_game *game);
-void		draw_minimap(t_game *game);
-void		draw_player(t_game *game);
-uint32_t	mk_col(unsigned char r, unsigned char g, unsigned char b);
-void		draw_minimap_rays(t_game *game);
-void		draw_walls(t_game *game);
+void    render(t_game *game);
+void draw_minimap(t_game *game);
+void    draw_player(t_game *game);
+uint32_t mk_col(unsigned char r, unsigned char g, unsigned char b);
+void draw_minimap_rays(t_game *game);
+void    draw_walls(t_game *game);
+void draw_wall_texture(t_game *game, int x);
+mlx_texture_t	*get_texture(t_game *game);
+uint32_t	get_texture_color(mlx_texture_t *texture, int x, int y);
 #endif
