@@ -35,6 +35,7 @@ SRC     := srcs/main/main.c \
 		   srcs/execution/minimap.c \
 		   srcs/execution/rotation.c \
 		   srcs/execution/walls.c \
+		   srcs/execution/textures.c \
 
 # Object files
 OBJ     := $(SRC:srcs/%.c=$(OBJDIR)/%.o)

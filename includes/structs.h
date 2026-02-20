@@ -26,6 +26,10 @@ typedef struct s_map
 
 typedef struct s_texture
 {
+	mlx_texture_t *north;
+	mlx_texture_t *east;
+	mlx_texture_t *west;
+	mlx_texture_t *south;
 }			t_texture;
 
 typedef struct s_wall
@@ -66,6 +70,8 @@ typedef	struct s_ray
 	double hit_y;
 	int side;
 	double wall_x;
+	//xpm_t *textures;
+	mlx_texture_t	*texture;
 }	t_ray;
 
 typedef struct s_game
@@ -85,11 +91,11 @@ typedef struct s_game
 	uint32_t	mini_color;
 	bool 	player_moving;
 	bool	game_running;
-
+	mlx_texture_t *text;
 	bool	is_resizing;
 	int	new_w;
 	int new_h;
-
+	t_texture *texture;
 	t_map	map;
 	// struct s_texture	*texture;
 	// struct s_player		*player;

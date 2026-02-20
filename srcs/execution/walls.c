@@ -94,6 +94,9 @@ void    calculate_ray(t_game *game, double ray)
    init_dda(game, ray, &dda);
    perform_dda(game, &dda);
    compute_hit(game, ray, &dda);
+   printf("hello1\n");
+   game->ray.texture = get_texture(game);
+   //printf("abcd\n");
 }
 
 void    draw_wall_tile(t_game *game, double ray, int x)
@@ -111,13 +114,16 @@ void    draw_wall_tile(t_game *game, double ray, int x)
         game->wall.visible_start = 0;
     if (game->wall.visible_end >= game->height)
         game->wall.visible_end = game->height - 1;
-    int j = game->wall.visible_start;
-    while (j <= game->wall.visible_end)
-    {
-        mlx_put_pixel(game->image, x, j, mk_col(255, 0, 255));
-        j++;
-    }
+   // int j = game->wall.visible_start;
+    printf("hello\n");
+    draw_wall_texture(game, x);
+    // while (j <= game->wall.visible_end)
+    // {
+    //     mlx_put_pixel(game->image, x, j, mk_col(255, 0, 255));
+    //     j++;
+    // }
 }
+
 
 void    draw_walls(t_game *game)
 {
@@ -134,6 +140,7 @@ void    draw_walls(t_game *game)
         offset = (x + 0.5) - (double)((double)game->width / 2.0);
         angle = atan(offset / plane);
         ray = game->player.angle + angle;
+        printf("draw_walls\n");
         draw_wall_tile(game, ray, (int)x);
         x++;
     }
