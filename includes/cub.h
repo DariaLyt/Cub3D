@@ -48,6 +48,10 @@ int			assign_rgb(char **m_str);
 // Map list
 int			add_to_map_list(t_game *game, char *line);
 
+// Floodfill
+int is_map_closed(t_game *game);
+int ft_dup_map(t_game *game);
+
 // Map parsing helpers
 int			is_empty_line(char *str);
 int			is_space(char c);
