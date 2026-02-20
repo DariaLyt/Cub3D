@@ -82,6 +82,7 @@ int init_game(t_game *game)
     game->player.angle = 0; // <- based on N S W E
     game->floor = BLACK_COLOR; // turned rgb in int (need to make function for this);
     game->ceiling = WHITE_COLOR;
+    game->is_resizing = false;
     if (!init_mlx(game))
         return (0);
     int i = 0;
@@ -90,11 +91,13 @@ int init_game(t_game *game)
     //     ft_printf("%s\n", game->map.grid[i]);
     //     i++;
     // }
+    printf("init_game\n");
     game->image = mlx_new_image(game->mlx, game->width, game->width);
     if (!game->image)
     {
         ft_printf("Failed mlx image\n");
         return (0);
     }
+    printf("init_game1\n");
     return (1);
 }
