@@ -38,44 +38,53 @@ int	save_path(char **dest, char *src)
 	return (SUCCESS);
 }
 
-static int assign_rgb(char *rgb)
+int	assign_rgb(char **m_str)
 {
-	char *color;
-	int i = 0;
+	int		rgb;
+	char	*pos;
 
-	while(rgb[i])
-	{
-		if(rgb[i] > 0 && rgb[i] < 9)
-			color[i] = rgb[i];
-		if(rgb[i] == ',')
-			break;
-		else
-			return(INVALID);
-		i++;
-	}
-	return(ft_atoi(color));
+	pos = *m_str;
+	while (*pos && (*pos == ' ' || *pos == '\t'))
+		pos++;
+	if (!ft_isdigit(*pos))
+		return (INVALID);
+	rgb = atoi(pos);
+	while (*pos && ft_isdigit(*pos))
+		pos++;
+	while (*pos && (*pos == ' ' || *pos == '\t'))
+		pos++;
+	if (*pos == ',')
+		pos++;
+	*m_str = pos;
+	return (rgb);
 }
 
 int	save_color(int *dest, char *src)
 {
-	char *path;
-	int r, g, b;
+	char	*path;
+	char	*tmp;
 
-	if(*dest != -1)
-		return(INVALID);
-	path = ft_strtrim(src, " \n\t");
-	if(!path)
-		return(INVALID);
-	if(path[0] == '\0')
+	int r, g, b;
+	if (*dest != -1)
 	{
 		free(path);
-		return(INVALID);
+		return (INVALID);
 	}
-	r = assign_rgb(path);
-	g = assign_rgb(path);
-	b = assign_rgb(path);
-	printf("r:%d g:%d b:%d \n", r, g ,b);
-	*dest = mk_col(r, g, b);
-	printf("save colour debug\n");
+	path = ft_strtrim(src, " \n\t");
+	tmp = path;
+	r = assign_rgb(&tmp);
+	printf("%d\n", r); // Delete me after
+	g = assign_rgb(&tmp);
+	printf("%d\n", g); // Delete me after
+	b = assign_rgb(&tmp);
+	printf("%d\n", b); // Delete me after
+	free(path);
+	// while(*tmp && (*tmp == ' ' || *tmp == '\t'))
+	// 	tmp++;
+	// if(*tmp != '\0')
+	// 	return(INVALID);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		return (INVALID);
+	*dest = (r << 16 | g << 8 | b);
 	return (SUCCESS);
 }
