@@ -28,18 +28,25 @@ int	parse_file(t_game *game, int fd)
 			free(line);
 			continue ;
 		}
-		if (count < 6) // change 6 when rgb ready
+		if (count < 6)
 		{
 			if (is_metadata(game, line) == SUCCESS)
 				count++;
 			else
+			{
+				free(line);
+				printf("Corrupted map\n");
 				return (INVALID);
+			}
 		}
 		else
 			add_to_map_list(game, line);
 		free(line);
 	}
-	if (count != 6) // change to 6 when rgb ready
+	if (count != 6) // << more rigorous
+	{
+		printf("Metadata missing\n");
 		return (INVALID);
+	}
 	return (SUCCESS);
 }

@@ -66,3 +66,5 @@ To do
 Traps
 ====================
 DDA algo, ray calculation
+- double paths on single line
+- spaces and tabs in texture/metadata line in map
