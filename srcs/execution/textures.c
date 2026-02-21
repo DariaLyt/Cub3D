@@ -38,16 +38,16 @@ mlx_texture_t	*get_texture(t_game *game) // replace game->text with proper textu
 	if (game->ray.side == 0)
 	{
 		if (game->ray.dir_x > 0)
-			return (game->text);
+			return (game->texture.east);
 		else
-            return (game->text);
+            return (game->texture.west);
 	}
 	else
 	{
 		if (game->ray.dir_y > 0)
-            return (game->text);
+            return (game->texture.south);
 		else
-            return (game->text);
+            return (game->texture.north);
     }
 }
 

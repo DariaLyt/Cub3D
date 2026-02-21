@@ -82,7 +82,6 @@ void draw_minimap(t_game *game)
         }
         y++;
     }
-    //printf("\npllayer x = %f, y = %f", game->player.pos_x, game->player.pos_y);
 }
 
 void    draw_player(t_game *game)

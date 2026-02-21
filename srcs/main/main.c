@@ -4,9 +4,7 @@ void	game_loop(void *data)
 {
 	t_game *game;
 	game = (t_game *)data;
-	printf("game_loop before render\n");
 	render(game);
-	printf("game_loop after render\n");
 	handle_movement(game);
 	handle_rotation(game);
 
@@ -19,15 +17,12 @@ int execution(t_game *game)
 	if (!init_game(game))
         return (0);
     mlx_image_to_window(game->mlx, game->image, 0, 0);
-	printf("execution1\n");
 	game->player.pos_x= 26;
 	game->player.pos_y = 11;
     mlx_loop_hook(game->mlx, game_loop, game);
-	printf("execution2\n");
     mlx_loop(game->mlx);
-	printf("execution3\n");
     mlx_terminate(game->mlx);
-    ft_putstr_fd("Hello world!", 1);
+    //ft_putstr_fd("Hello world!", 1);
 	return (1);
 }
 

@@ -50,26 +50,15 @@ void    render(t_game *game)
 	{
 		game->width = game->new_w;
 		game->height = game->new_h;
-       // printf("resize1\n");
 		mlx_delete_image(game->mlx, game->image);
-        //printf("resize2\n");
 		game->image = mlx_new_image(game->mlx, game->new_w, game->new_h);
-        //printf("resize3\n");
 		mlx_image_to_window(game->mlx, game->image, 0, 0);
-        //printf("resize4\n");
 		game->player.speed = (double)game->height * SPEED;
 		game->is_resizing = false;
 	}
-    printf("a1\n");
     draw_floor_ceiling(game);
-    printf("a2\n");
     draw_walls(game);
-    printf("a3\n");
     draw_minimap(game);
-    printf("a4\n");
     draw_player(game);
-    printf("a5\n");
     draw_minimap_rays(game);
-    printf("a6\n");
-
 }
