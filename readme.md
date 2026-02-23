@@ -59,9 +59,8 @@ Mem allocs
 
 To do
 ====================
-• rgb parsing
-
-• map grid linked list to array
+- floodfill
+- player spawn and direction
 
 Traps
 ====================

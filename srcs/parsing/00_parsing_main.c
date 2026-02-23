@@ -33,7 +33,8 @@ int	fill_map_struct(t_game *game, char *map_name)
 	}
 	close(fd);
 	convert_list_to_grid(game);
-	// floodfill
+	if(is_map_closed(game) == INVALID)
+		return(printf("inside fill_map_struct, found opening with is_map_closed"), INVALID);
 	ft_lstclear(&game->map.temp_list, free);
 	return (SUCCESS);
 }
