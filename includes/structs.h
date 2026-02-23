@@ -59,7 +59,7 @@ typedef struct s_player
 	double	pos_y;
 	int		x; // x cord for spawn on grid
 	int 	y; // y cord for spawn on grid 
-	char 	*direction; //direction facing on spawn
+	char 	direction; //direction facing on spawn
 	double	angle;
 	double	speed;
 }			t_player;

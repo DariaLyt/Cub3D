@@ -52,7 +52,7 @@ int				add_to_map_list(t_game *game, char *line);
 int				is_map_closed(t_game *game);
 char			**ft_dup_map(t_game *game);
 int				flood_fill(t_game *game, char **temp_grid, int x, int y);
-void 			find_player(t_game *game);
+int 			find_player(t_game *game);
 void			save_play_cord(t_game *game, char direction, int x, int y);
 
 // Map parsing helpers
