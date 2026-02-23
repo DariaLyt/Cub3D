@@ -8,15 +8,13 @@ int is_map_closed(t_game *game)
 	temp_grid = ft_dup_map(game);
 
 	if(find_player(game) == INVALID)
-	{
 		free_tmp_map(temp_grid);
-		return(printf("rip bad map, not enclosed\n"), INVALID);
-	}		
 
 	if(flood_fill(game, temp_grid, game->player.x, game->player.y) == INVALID)
 	{
 		free_tmp_map(temp_grid);
-		return(printf("rip bad map, not enclosed\n"), INVALID);
+		printf("Error: Map not enclosed\n");
+		return(INVALID);
 	}
 	free_tmp_map(temp_grid);
 	return(SUCCESS);
@@ -44,7 +42,7 @@ int find_player(t_game *game)
     }
     if (count != 1)
     {
-        printf("Error\nMap must have exactly one player (found %d)\n", count);
+        printf("Error: Map must have exactly one player (found %d)\n", count);
 		return(INVALID);
     }
 	return(SUCCESS);
@@ -84,22 +82,17 @@ char **ft_dup_map(t_game *game)
 
 int flood_fill(t_game *game, char **temp_grid, int x, int y)
 {
-    // 1. OUT OF BOUNDS = LEAK
     if (y < 0 || y >= game->map.height || x < 0 || x >= (int)ft_strlen(temp_grid[y]))
         return (INVALID);
 
-    // 2. SPACE = LEAK
     if (temp_grid[y][x] == ' ' || temp_grid[y][x] == '\t' || temp_grid[y][x] == '\n')
         return (INVALID);
 
-    // 3. WALL OR ALREADY VISITED = SAFE
     if (temp_grid[y][x] == '1' || temp_grid[y][x] == 'V')
         return (SUCCESS);
 
-    // 4. MARK AS VISITED
     temp_grid[y][x] = 'V';
 
-    // 5. RECURSE: If ANY direction finds an INVALID path, this whole path is INVALID
     if (flood_fill(game, temp_grid, x + 1, y) == INVALID) return (INVALID);
     if (flood_fill(game, temp_grid, x - 1, y) == INVALID) return (INVALID);
     if (flood_fill(game, temp_grid, x, y + 1) == INVALID) return (INVALID);
