@@ -8,9 +8,12 @@ int is_map_closed(t_game *game)
 	temp_grid = ft_dup_map(game);
 
 	if(find_player(game) == INVALID)
+	{
 		free_tmp_map(temp_grid);
+		return(INVALID);
+	}
 
-	if(flood_fill(game, temp_grid, game->player.x, game->player.y) == INVALID)
+	if(flood_fill(game, temp_grid, game->player.pos_x, game->player.pos_y) == INVALID)
 	{
 		free_tmp_map(temp_grid);
 		printf("Error: Map not enclosed\n");
@@ -50,34 +53,36 @@ int find_player(t_game *game)
 
 void save_play_cord(t_game *game, char direction, int x, int y)
 {
-	game->player.x = x;
-	game->player.y = y;
+	game->player.pos_x = x;
+	game->player.pos_y = y;
 	game->player.direction = direction;
 }
 
 char **ft_dup_map(t_game *game)
 {
-    int y = 0;
     char **temp_grid;
-    
-    temp_grid = malloc(sizeof(char *) * (game->map.height + 1));
-    if(!temp_grid)
-        return(NULL);
+    int y;
+    int x;
 
-    while(y < game->map.height)
+    temp_grid = malloc(sizeof(char *) * (game->map.height + 1));
+    y = 0;
+    while (y < game->map.height)
     {
-        temp_grid[y] = ft_strdup(game->map.grid[y]);
-        if(!temp_grid[y])
+        temp_grid[y] = malloc(sizeof(char) * (game->map.width + 1));
+        x = 0;
+        while (x < game->map.width)
         {
-            while (--y >= 0)
-                free(temp_grid[y]);
-            free(temp_grid);
-            return(NULL);
+            if (x < (int)ft_strlen(game->map.grid[y]))
+                temp_grid[y][x] = game->map.grid[y][x];
+            else
+                temp_grid[y][x] = ' ';
+            x++;
         }
+        temp_grid[y][x] = '\0';
         y++;
     }
     temp_grid[y] = NULL;
-    return(temp_grid);
+    return (temp_grid);
 }
 
 int flood_fill(t_game *game, char **temp_grid, int x, int y)
