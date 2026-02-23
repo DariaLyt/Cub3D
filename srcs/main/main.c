@@ -20,8 +20,8 @@ int execution(t_game *game)
         return (0);
     mlx_image_to_window(game->mlx, game->image, 0, 0);
 	printf("execution1\n");
-	game->player.pos_x= 26;
-	game->player.pos_y = 11;
+	// game->player.pos_x= 26;
+	// game->player.pos_y = 11;
     mlx_loop_hook(game->mlx, game_loop, game);
 	printf("execution2\n");
     mlx_loop(game->mlx);
