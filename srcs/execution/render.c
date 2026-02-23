@@ -60,16 +60,16 @@ void    render(t_game *game)
 		game->player.speed = (double)game->height * SPEED;
 		game->is_resizing = false;
 	}
-    printf("a1\n");
+    // printf("a1\n");
     draw_floor_ceiling(game);
-    printf("a2\n");
+    // printf("a2\n");
     draw_walls(game);
-    printf("a3\n");
+    // printf("a3\n");
     draw_minimap(game);
-    printf("a4\n");
+    // printf("a4\n");
     draw_player(game);
-    printf("a5\n");
+    // printf("a5\n");
     draw_minimap_rays(game);
-    printf("a6\n");
+    // printf("a6\n");
 
 }

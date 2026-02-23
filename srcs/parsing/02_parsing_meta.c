@@ -73,11 +73,8 @@ int	save_color(int *dest, char *src)
 	path = ft_strtrim(src, " \n\t");
 	tmp = path;
 	r = assign_rgb(&tmp);
-	printf("%d\n", r); // Delete me after
 	g = assign_rgb(&tmp);
-	printf("%d\n", g); // Delete me after
 	b = assign_rgb(&tmp);
-	printf("%d\n", b); // Delete me after
 	free(path);
 	// while(*tmp && (*tmp == ' ' || *tmp == '\t'))
 	// 	tmp++;
