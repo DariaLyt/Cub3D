@@ -1,73 +1,6 @@
 #include "cub.h"
 
-double	calc_delta(double dir)
-{
-	if (dir == 0.0)
-		return (1e30);
-	return (fabs(1.0 / dir));
-}
-
-void init_dda(t_game *game, double angle, t_dda *dda)
-{
-    double player_x;
-    double player_y;
-    int map_x;
-    int map_y;
-
-    player_x = game->player.pos_x;
-    player_y = game->player.pos_y;
-    map_x = (int)player_x;
-    map_y = (int)player_y;
-
-    game->ray.dir_x = cos(angle);
-    game->ray.dir_y = sin(angle); 
-    dda->delta_x = calc_delta(game->ray.dir_x);
-	if (game->ray.dir_x < 0)
-	{
-		dda->step_x = -1;
-		dda->side_x = (player_x - map_x) * dda->delta_x;
-	}
-	else
-	{
-		dda->step_x = 1;
-		dda->side_x = (map_x + 1.0 - player_x) * dda->delta_x;
-	}
-    dda->delta_y = calc_delta(game->ray.dir_y);
-	if (game->ray.dir_y < 0)
-	{
-		dda->step_y = -1;
-		dda->side_y = (player_y - map_y) * dda->delta_y;
-	}
-	else
-	{
-		dda->step_y = 1;
-		dda->side_y = (map_y + 1.0 - player_y) * dda->delta_y;
-	}
-    dda->map_x = map_x;
-    dda->map_y = map_y;
-}
-
-void	perform_dda(t_game *game, t_dda *dda)
-{
-	while (1)
-	{
-		if (dda->side_x < dda->side_y)
-		{
-			dda->side_x += dda->delta_x;
-			dda->map_x += dda->step_x;
-			game->ray.side = 0;
-		}
-		else
-		{
-			dda->side_y += dda->delta_y;
-			dda->map_y += dda->step_y;
-			game->ray.side = 1;
-		}
-        if (game->map.grid[dda->map_y][dda->map_x] == '1')
-            break;
-	}
-}
- void	compute_hit(t_game *game, double angle, t_dda *dda)
+void	compute_hit(t_game *game, double angle, t_dda *dda)
 {
 	double	dist;
 
@@ -111,13 +44,7 @@ void    draw_wall_tile(t_game *game, double ray, int x)
         game->wall.visible_start = 0;
     if (game->wall.visible_end >= game->height)
         game->wall.visible_end = game->height - 1;
-   // int j = game->wall.visible_start;
     draw_wall_texture(game, x);
-    // while (j <= game->wall.visible_end)
-    // {
-    //     mlx_put_pixel(game->image, x, j, mk_col(255, 0, 255));
-    //     j++;
-    // }
 }
 
 

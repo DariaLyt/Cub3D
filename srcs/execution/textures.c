@@ -33,7 +33,7 @@ uint32_t	get_texture_color(mlx_texture_t *texture, int x, int y)
 	return (*(uint32_t *)(texture->pixels + y * texture->width * 4 + x * 4));
 }
 
-mlx_texture_t	*get_texture(t_game *game) // replace game->text with proper textures
+mlx_texture_t	*get_texture(t_game *game)
 {
 	if (game->ray.side == 0)
 	{
@@ -63,12 +63,8 @@ void draw_wall_texture(t_game *game, int x)
     while (y <= game->wall.visible_end)
     {
         tex_y = select_tex_y(game, y);
-        //printf("did i go here?\n");
         color = get_texture_color(game->ray.texture, tex_x, tex_y);
         mlx_put_pixel(game->image, x, y, color);
         y++;
     }
-    /*
-        the function should look what direction it is NO SO EA WE and select right texture
-    */
 }

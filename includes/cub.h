@@ -18,8 +18,9 @@
 # define STEP_SIZE 0.5
 # define SPEED 0.00005
 
-# define WHITE_COLOR 0xFFFFFFFF
-# define BLACK_COLOR 0x000000
+# define GRAY_COLOR 2054449919
+# define BLACK_COLOR 255
+# define RED_COLOR 0xFF0000FF
 # define COLLISION 0.15
 
 // Main
@@ -76,20 +77,49 @@ void			print_game_data(t_game *game);
 // Execution
 int				init_game(t_game *game);
 
-// *movement
-void			handle_movement(t_game *game);
-int				movement_delta(t_game *game, double *x, double *y);
-int				is_wall(t_game *game, double x, double y);
-void			handle_rotation(t_game *game);
+// dda.c
+double	calc_delta(double dir);
+void init_dda_axis_x(t_game *game, t_dda *dda, double player, int map);
+void    init_dda_axis_y(t_game *game, t_dda *dda, double player, int map);
+void init_dda(t_game *game, double angle, t_dda *dda);
+void	perform_dda(t_game *game, t_dda *dda);
 
-// *render
-void			render(t_game *game);
-void			draw_minimap(t_game *game);
-void			draw_player(t_game *game);
-uint32_t		mk_col(unsigned char r, unsigned char g, unsigned char b);
-void			draw_minimap_rays(t_game *game);
-void			draw_walls(t_game *game);
-void			draw_wall_texture(t_game *game, int x);
+// execution.c
+int load_texture(char *path, mlx_texture_t **texture);
+int init_textures(t_game *game, t_texture *text);
+int init_mlx(t_game *game);
+int init_game(t_game *game);
+
+// minimap.c
+void draw_minimap_rays(t_game *game);
+void draw_mini_square(t_game *game, int x, int y, int size);
+void draw_minimap(t_game *game);
+void    draw_player(t_game *game);
+
+// movement.c
+void    handle_movement(t_game *game);
+int movement_delta(t_game *game, double *x, double *y);
+int is_wall(t_game *game, double x, double y);
+int can_move(t_game *game, double x, double y);
+void    player_move(t_game *game, double x, double y);
+
+// render.c
+void    draw_floor_ceiling(t_game *game);
+void    resize_call(int width, int height, void *data);
+void    render(t_game *game);
+
+// rotation.c
+void    handle_rotation(t_game *game);
+
+// textures.c
+uint32_t	get_texture_color(mlx_texture_t *texture, int x, int y);
 mlx_texture_t	*get_texture(t_game *game);
-uint32_t		get_texture_color(mlx_texture_t *texture, int x, int y);
+void draw_wall_texture(t_game *game, int x);
+
+// walls.c
+void	compute_hit(t_game *game, double angle, t_dda *dda);
+void    calculate_ray(t_game *game, double ray);
+void    draw_wall_tile(t_game *game, double ray, int x);
+void    draw_walls(t_game *game);
+
 #endif

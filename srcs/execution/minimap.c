@@ -20,7 +20,7 @@ void draw_minimap_rays(t_game *game)
             x = ray_x * MINIMAP_SCALE;
             y = ray_y * MINIMAP_SCALE;
             if (x >= 0 && x < game->width && y >= 0 && y < game->height)
-                mlx_put_pixel(game->image, (int)x, (int)y, mk_col(255,0,0));
+                mlx_put_pixel(game->image, (int)x, (int)y, RED_COLOR);
         }
         angle += 0.001;
     }
@@ -47,11 +47,6 @@ void draw_mini_square(t_game *game, int x, int y, int size)
     }
 }
 
-uint32_t mk_col(unsigned char r, unsigned char g, unsigned char b)
-{
-    return (0xFF | b << 8 | g << 16 | r << 24);
-}
-
 void draw_minimap(t_game *game)
 {
     int x;
@@ -70,13 +65,9 @@ void draw_minimap(t_game *game)
             screen_x = x * MINIMAP_SCALE;
             screen_y = y * MINIMAP_SCALE;
             if (game->map.grid[y][x] == '1')
-            {
-                game->mini_color = mk_col(0, 0, 255);
-            }
+                game->mini_color = BLACK_COLOR;
             else if (game->map.grid[y][x] == '0')
-            {
-                game->mini_color = 16400995;
-            }
+                game->mini_color = GRAY_COLOR; 
             draw_mini_square(game, screen_x, screen_y, MINIMAP_SCALE);
             x++;
         }
@@ -103,11 +94,10 @@ void    draw_player(t_game *game)
         {
             if (x+i >= 0 && x + i < game->width && y+ j >= 0 && y + j < game->height)
             {
-                mlx_put_pixel(game->image, x + i, y + j, mk_col(255,0,0));
+                mlx_put_pixel(game->image, x + i, y + j, RED_COLOR);
             }
             j++;
         }
         i++;
     }
-
 }

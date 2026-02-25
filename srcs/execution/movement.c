@@ -1,7 +1,5 @@
 #include "cub.h"
 
-void    player_move(t_game *game, double x, double y);
-
 void    handle_movement(t_game *game)
 {
     double  x;
