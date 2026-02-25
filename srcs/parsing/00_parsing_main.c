@@ -33,8 +33,9 @@ int	fill_map_struct(t_game *game, char *map_name)
 	}
 	close(fd);
 	convert_list_to_grid(game);
+	if(is_map_closed(game) == INVALID)
+		return(INVALID);
 	ft_lstclear(&game->map.temp_list, free);
-	// floodfill
 	return (SUCCESS);
 }
 
@@ -46,8 +47,8 @@ void	init_game_struct(t_game *game)
 	game->map.so_path = NULL;
 	game->map.we_path = NULL;
 	game->map.ea_path = NULL;
-	game->map.floor_col = 255;   // << hardcoded values
-	game->map.ceiling_col = 255; // << hardcoded values
+	game->map.floor_col = -1;
+	game->map.ceiling_col = -1;
 	game->map.grid = NULL;
 	game->map.width = 0;
 	game->map.height = 0;

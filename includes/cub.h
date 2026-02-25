@@ -11,7 +11,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-
 # define MIN_WIDTH 384
 # define MIN_HEIGHT 216
 # define MINIMAP_SCALE 16
@@ -23,66 +22,74 @@
 # define BLACK_COLOR 0x000000
 # define COLLISION 0.15
 
-
 // Main
-int		run_game(char *map_name, t_game *game);
+int				run_game(char *map_name, t_game *game);
 
 // Map parsing
-int		parsing(char *map_name, t_game *game);
-int		parse_file(t_game *game, int fd);
-int		convert_list_to_grid(t_game *game);
+int				parsing(char *map_name, t_game *game);
+int				parse_file(t_game *game, int fd);
+int				convert_list_to_grid(t_game *game);
 
 // Map Validity check
-int		is_valid_map_line(char *line);
-char	*find_file(char *map_name);
+int				is_valid_map_line(char *line);
+char			*find_file(char *map_name);
 
 // Map struct
-void	init_game_struct(t_game *game);
-int		fill_map_struct(t_game *game, char *map_name);
-void	update_map_dims(t_map *map, char *line);
+void			init_game_struct(t_game *game);
+int				fill_map_struct(t_game *game, char *map_name);
+void			update_map_dims(t_map *map, char *line);
 
 // Metadata
-int		is_metadata(t_game *game, char *line);
-int		save_path(char **dest, char *src);
-int		save_color(int *dest, char *src);
+int				is_metadata(t_game *game, char *line);
+int				save_path(char **dest, char *src);
+int				save_color(int *dest, char *src);
+int				assign_rgb(char **m_str);
 
 // Map list
-int		add_to_map_list(t_game *game, char *line);
+int				add_to_map_list(t_game *game, char *line);
+
+// Floodfill
+int				is_map_closed(t_game *game);
+char			**ft_dup_map(t_game *game);
+int				flood_fill(t_game *game, char **temp_grid, int x, int y);
+int 			find_player(t_game *game);
+void			save_play_cord(t_game *game, char direction, int x, int y);
 
 // Map parsing helpers
-int		is_empty_line(char *str);
-int		is_space(char c);
-char	*skip_spaces(char *str);
-char	*ft_strjoin_and_free(char *map_whole, char *line);
-int		is_valid_char(char c);
+int				is_empty_line(char *str);
+int				is_space(char c);
+char			*skip_spaces(char *str);
+char			*ft_strjoin_and_free(char *map_whole, char *line);
+int				is_valid_char(char c);
 
 // Cleanup
-void	free_map(t_game *game);
+void			free_map(t_game *game);
+void			free_tmp_map(char **map);
 
 // Error
 
 // Parsing Utils
 
 // Debug
-void	print_game_data(t_game *game);
+void			print_game_data(t_game *game);
 
 // Execution
-int init_game(t_game *game);
+int				init_game(t_game *game);
 
 // *movement
-void    handle_movement(t_game *game);
-int movement_delta(t_game *game, double *x, double *y);
-int is_wall(t_game *game, double x, double y);
-void    handle_rotation(t_game *game);
+void			handle_movement(t_game *game);
+int				movement_delta(t_game *game, double *x, double *y);
+int				is_wall(t_game *game, double x, double y);
+void			handle_rotation(t_game *game);
 
 // *render
-void    render(t_game *game);
-void draw_minimap(t_game *game);
-void    draw_player(t_game *game);
-uint32_t mk_col(unsigned char r, unsigned char g, unsigned char b);
-void draw_minimap_rays(t_game *game);
-void    draw_walls(t_game *game);
-void draw_wall_texture(t_game *game, int x);
+void			render(t_game *game);
+void			draw_minimap(t_game *game);
+void			draw_player(t_game *game);
+uint32_t		mk_col(unsigned char r, unsigned char g, unsigned char b);
+void			draw_minimap_rays(t_game *game);
+void			draw_walls(t_game *game);
+void			draw_wall_texture(t_game *game, int x);
 mlx_texture_t	*get_texture(t_game *game);
-uint32_t	get_texture_color(mlx_texture_t *texture, int x, int y);
+uint32_t		get_texture_color(mlx_texture_t *texture, int x, int y);
 #endif

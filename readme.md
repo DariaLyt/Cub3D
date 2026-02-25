@@ -59,10 +59,11 @@ Mem allocs
 
 To do
 ====================
-• rgb parsing
-
-• map grid linked list to array
+- floodfill
+- player spawn and direction
 
 Traps
 ====================
 DDA algo, ray calculation
+- double paths on single line
+- spaces and tabs in texture/metadata line in map

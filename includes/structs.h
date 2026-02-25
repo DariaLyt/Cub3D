@@ -57,6 +57,7 @@ typedef struct s_player
 {
 	double	pos_x;
 	double	pos_y;
+	char 	direction; //direction facing on spawn
 	double	angle;
 	double	speed;
 }			t_player;
