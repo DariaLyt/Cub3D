@@ -82,6 +82,6 @@ int	save_color(int *dest, char *src)
 	// 	return(INVALID);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (INVALID);
-	*dest = (r << 16 | g << 8 | b);
+	*dest = (0xFF | b << 8 | g << 16 | r << 24);
 	return (SUCCESS);
 }

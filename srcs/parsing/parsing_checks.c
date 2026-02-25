@@ -1,17 +1,17 @@
 #include "cub.h"
 
-	// Currently not used
-int is_xpm(char *path)
-{
-    int len;
+// 	// Currently not used
+// int is_xpm(char *path)
+// {
+//     int len;
 
-    len = ft_strlen(path);
-    if (len < 5)
-        return (0);
-    if (ft_strncmp(path + len - 4, ".xpm", 4) == 0)
-        return (1);
-    return (0);
-}
+//     len = ft_strlen(path);
+//     if (len < 5)
+//         return (0);
+//     if (ft_strncmp(path + len - 4, ".xpm", 4) == 0)
+//         return (1);
+//     return (0);
+// }
 
 int is_space(char c)
 {
