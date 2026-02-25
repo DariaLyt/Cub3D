@@ -62,6 +62,7 @@ char	**ft_dup_map(t_game *game)
 	int		y;
 	int		x;
 
+    printf("here?\n");
 	temp_grid = malloc(sizeof(char *) * (game->map.height + 1));
 	y = 0;
 	while (y < game->map.height)

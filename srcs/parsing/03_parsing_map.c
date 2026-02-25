@@ -31,6 +31,7 @@ int	convert_list_to_grid(t_game *game)
 	t_list	*current;
 	int		i;
 
+	printf("are we here?\n"); // delete
 	if (!game->map.temp_list)
 		return (INVALID);
 	game->map.grid = malloc(sizeof(char *) * (game->map.height + 1));
@@ -42,7 +43,7 @@ int	convert_list_to_grid(t_game *game)
 	{
 		game->map.grid[i] = ft_strdup(current->content);
 		if (!game->map.grid[i])
-			return (ALLOC_FAIL); // free?
+			return (ALLOC_FAIL);
 		current = current->next;
 		i++;
 	}
