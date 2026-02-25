@@ -56,22 +56,23 @@ void draw_minimap(t_game *game)
 
 
     game->mini_color = 0;
-    y = 0;
-    while (game->map.grid[y])
+    y = -1;
+    while (game->map.grid[++y])
     {
         x = 0;
         while (game->map.grid[y][x])
         {
             screen_x = x * MINIMAP_SCALE;
             screen_y = y * MINIMAP_SCALE;
-            if (game->map.grid[y][x] == '1')
+            if (game->map.grid[y][x] == '\n')
+                break;
+            if (game->map.grid[y][x] == '1' || game->map.grid[y][x] == ' ' || game->map.grid[y][x] <= 13)
                 game->mini_color = BLACK_COLOR;
-            else if (game->map.grid[y][x] == '0')
+            else if (game->map.grid[y][x] == '0' || game->map.grid[y][x] == game->player.direction)
                 game->mini_color = GRAY_COLOR; 
             draw_mini_square(game, screen_x, screen_y, MINIMAP_SCALE);
             x++;
         }
-        y++;
     }
 }
 

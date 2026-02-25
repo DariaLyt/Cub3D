@@ -88,7 +88,6 @@ void    player_move(t_game *game, double x, double y)
 
     old_x = game->player.pos_x;
     old_y = game->player.pos_y;
-    printf("player x = %f, y = %f\n", game->player.pos_x, game->player.pos_y);
     if (can_move(game, x + old_x, y + old_y))
     {
         game->player.pos_x = x + old_x;

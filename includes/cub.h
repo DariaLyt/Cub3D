@@ -17,6 +17,7 @@
 # define TILE_SIZE 64
 # define STEP_SIZE 0.5
 # define SPEED 0.00005
+# define MOUSE_SENSITIVITY 0.025
 
 # define GRAY_COLOR 2054449919
 # define BLACK_COLOR 255
@@ -110,6 +111,7 @@ void    render(t_game *game);
 
 // rotation.c
 void    handle_rotation(t_game *game);
+void    handle_mouse_rotation(t_game *game);
 
 // textures.c
 uint32_t	get_texture_color(mlx_texture_t *texture, int x, int y);

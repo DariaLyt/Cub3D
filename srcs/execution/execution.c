@@ -67,10 +67,23 @@ int init_mlx(t_game *game)
     return (1);
 }
 
+void init_player_angle(t_game *game)
+{
+    if (game->player.direction == 'E')
+        game->player.angle = 0;
+    if (game->player.direction == 'W')
+        game->player.angle = M_PI;
+    if (game->player.direction == 'N')
+        game->player.angle = 3 * M_PI / 2;
+    if (game->player.direction == 'S')
+        game->player.angle = M_PI / 2;
+}
+
 int init_game(t_game *game)
 {
     game->player.speed = 0.025;
-    game->player.angle = 0; // <- based on N S W E
+    init_player_angle(game);
+    game->mouse = 0;
     game->is_resizing = false;
     if (!init_mlx(game))
         return (0);
