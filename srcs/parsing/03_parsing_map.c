@@ -11,7 +11,6 @@ int	add_to_map_list(t_game *game, char *line)
 		return (ALLOC_FAIL);
 	ft_lstadd_back(&(game->map.temp_list), new_node);
 	update_map_dims(&game->map, line);
-	// << check here for Max map limit?
 	return (SUCCESS);
 }
 
