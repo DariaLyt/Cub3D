@@ -31,10 +31,7 @@ void	free_map(t_game *game)
 	free(game->map.ea_path);
 	free(game->map.we_path);
 	if(game->map.temp_list)
-	{
-		printf("debug: clearing temp list"); // <<delete me
 		ft_lstclear(&game->map.temp_list, free);	
-	}
 }
 
 char	*skip_spaces(char *str)

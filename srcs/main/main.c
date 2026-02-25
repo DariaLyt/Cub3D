@@ -4,9 +4,7 @@ void	game_loop(void *data)
 {
 	t_game *game;
 	game = (t_game *)data;
-	printf("game_loop before render\n");
 	render(game);
-	printf("game_loop after render\n");
 	handle_movement(game);
 	handle_rotation(game);
 
