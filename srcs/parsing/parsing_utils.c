@@ -31,8 +31,8 @@ void	free_map(t_game *game)
 	free(game->map.ea_path);
 	free(game->map.we_path);
 	free_texture(game);
-	if(game->map.temp_list)
-		ft_lstclear(&game->map.temp_list, free);	
+	if (game->map.temp_list)
+		ft_lstclear(&game->map.temp_list, free);
 }
 
 char	*skip_spaces(char *str)
@@ -44,14 +44,14 @@ char	*skip_spaces(char *str)
 	return (str);
 }
 
-void free_texture(t_game *game)
+void	free_texture(t_game *game)
 {
-	if(game->texture.north)
+	if (game->texture.north)
 		mlx_delete_texture(game->texture.north);
-	if(game->texture.east)
+	if (game->texture.east)
 		mlx_delete_texture(game->texture.east);
-	if(game->texture.south)
+	if (game->texture.south)
 		mlx_delete_texture(game->texture.south);
-	if(game->texture.west)
+	if (game->texture.west)
 		mlx_delete_texture(game->texture.west);
 }

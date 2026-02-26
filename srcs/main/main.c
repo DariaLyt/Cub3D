@@ -2,7 +2,8 @@
 
 void	game_loop(void *data)
 {
-	t_game *game;
+	t_game	*game;
+
 	game = (t_game *)data;
 	render(game);
 	handle_movement(game);
@@ -12,14 +13,14 @@ void	game_loop(void *data)
 		mlx_close_window(game->mlx);
 }
 
-int execution(t_game *game)
+int	execution(t_game *game)
 {
 	if (!init_game(game))
-        return (0);
-    mlx_image_to_window(game->mlx, game->image, 0, 0);
-    mlx_loop_hook(game->mlx, game_loop, game);
-    mlx_loop(game->mlx);
-    mlx_terminate(game->mlx);
+		return (0);
+	mlx_image_to_window(game->mlx, game->image, 0, 0);
+	mlx_loop_hook(game->mlx, game_loop, game);
+	mlx_loop(game->mlx);
+	mlx_terminate(game->mlx);
 	return (1);
 }
 
@@ -27,10 +28,10 @@ int	run_game(char *map_name, t_game *game)
 {
 	// game = malloc(sizeof(t_game));
 	// if (!game)
-		// return (0);
+	// return (0);
 	init_game_struct(game);
-	if(parsing(map_name, game) == INVALID)
-		return(INVALID); // error and cleanup
+	if (parsing(map_name, game) == INVALID)
+		return (INVALID);  // error and cleanup
 	print_game_data(game); // << debug print // delete me when done
 	// execution();
 	if (!execution(game))
@@ -38,8 +39,8 @@ int	run_game(char *map_name, t_game *game)
 		free_map(game);
 		return (INVALID);
 	}
-		free_map(game);
-		return (0);
+	free_map(game);
+	return (0);
 }
 
 int	main(int argc, char **argv)
