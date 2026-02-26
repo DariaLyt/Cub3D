@@ -1,7 +1,5 @@
 #include "cub.h"
 
-void    player_move(t_game *game, double x, double y);
-
 void    handle_movement(t_game *game)
 {
     double  x;
@@ -10,7 +8,6 @@ void    handle_movement(t_game *game)
     if (!movement_delta(game, &x, &y))
     {
         game->player_moving = false;
-         //printf("player x = %f, y = %f\n", game->player.pos_x, game->player.pos_y);
         return ;
     }
     player_move(game, x, y);
@@ -18,7 +15,6 @@ void    handle_movement(t_game *game)
 
 int movement_delta(t_game *game, double *x, double *y)
 {
-    //printf("player x = %f, y = %f\n", game->player.pos_x, game->player.pos_y);
     if (mlx_is_key_down(game->mlx, MLX_KEY_W))
     {
         *x = cos(game->player.angle) * game->player.speed;
@@ -92,10 +88,8 @@ void    player_move(t_game *game, double x, double y)
 
     old_x = game->player.pos_x;
     old_y = game->player.pos_y;
-    printf("player x = %f, y = %f\n", game->player.pos_x, game->player.pos_y);
     if (can_move(game, x + old_x, y + old_y))
     {
-        printf("\ncan move 1\n");
         game->player.pos_x = x + old_x;
         game->player.pos_y = y + old_y;
         game->player_moving = true;
@@ -104,13 +98,11 @@ void    player_move(t_game *game, double x, double y)
     {
         if (can_move(game, x + old_x, old_y))
         {
-            printf("\ncan move 2\n");
             game->player.pos_x = x + old_x;
             game->player_moving = true;
         }
         if (can_move(game, old_x, y + old_y))
         {
-            printf("\ncan move 2\n");
             game->player.pos_y = y + old_y;
             game->player_moving = true;
         }

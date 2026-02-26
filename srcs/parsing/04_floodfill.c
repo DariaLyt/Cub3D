@@ -51,8 +51,8 @@ int	find_player(t_game *game)
 
 void	save_play_cord(t_game *game, char direction, int x, int y)
 {
-	game->player.pos_x = x;
-	game->player.pos_y = y;
+	game->player.pos_x = x + 0.5;
+	game->player.pos_y = y + 0.5;
 	game->player.direction = direction;
 }
 

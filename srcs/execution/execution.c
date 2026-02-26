@@ -1,22 +1,22 @@
 #include "cub.h"
 
-int    init_test_map(t_game *game)
-{
-    game->map.grid = ft_calloc(7, sizeof (char *));
-    if (!game->map.grid)
-    {
-        ft_printf("Malloc failed\n");
-        return (0);
-    }
-    game->map.height = 6;
-    game->map.grid[0] = ft_strdup("1111111111111111111111");
-    game->map.grid[1] = ft_strdup("1000000000000000000001");
-    game->map.grid[2] = ft_strdup("1010010100100000101001");
-    game->map.grid[3] = ft_strdup("1010010010101010001001");
-    game->map.grid[4] = ft_strdup("1000000000000000000001");
-    game->map.grid[5] = ft_strdup("1111111111111111111111");
-    return (1);
-}
+// int    init_test_map(t_game *game)
+// {
+//     game->map.grid = ft_calloc(7, sizeof (char *));
+//     if (!game->map.grid)
+//     {
+//         ft_printf("Malloc failed\n");
+//         return (0);
+//     }
+//     game->map.height = 6;
+//     game->map.grid[0] = ft_strdup("1111111111111111111111");
+//     game->map.grid[1] = ft_strdup("1000000000000000000001");
+//     game->map.grid[2] = ft_strdup("1010010100100000101001");
+//     game->map.grid[3] = ft_strdup("1010010010101010001001");
+//     game->map.grid[4] = ft_strdup("1000000000000000000001");
+//     game->map.grid[5] = ft_strdup("1111111111111111111111");
+//     return (1);
+// }
 
 int load_texture(char *path, mlx_texture_t **texture)
 {
@@ -26,40 +26,32 @@ int load_texture(char *path, mlx_texture_t **texture)
     return (1);
 }
 
+int init_textures(t_game *game, t_texture *text)
+{
+    int check[5];
+
+    check[0] = load_texture(game->map.ea_path, &text->east);
+    check[1] = load_texture(game->map.no_path, &text->north);
+    check[2] = load_texture(game->map.we_path, &text->west);
+    check[3] = load_texture(game->map.so_path, &text->south);
+    if (!check[0] || !check[1] || !check[2] || !check[3])
+    {
+        ft_putstr_fd("Failed to load textures\n", 2);
+        return (0);
+    }
+    return (1);
+}
+
 int init_mlx(t_game *game)
 {
     int monitor_width;
     int monitor_height;
     t_texture *text;
 
-    //text = game->texture;
-    int check = 0;
+    text = &game->texture;
 
-    //text = (mlx_texture_t *)mlx_load_xpm42(game->map.ea_path);
-    printf("here\n");
-    game->text = mlx_load_png(game->map.ea_path);
-    printf("here1\n");
-
-    /* for some reason game->texture->east or whatever is causing segfault???*/
-
-    // check = load_texture(game->map.ea_path, &text->east);
-    // if (!check)
-    //     return (0);
-    // check = load_texture(game->map.no_path, &text->north);
-    // check = load_texture(game->map.we_path, &text->west);
-    // check = load_texture(game->map.so_path, &text->south);
-    // game->texture->north = mlx_load_png(game->map.ea_path);
-    // printf("here2\n");
-    // game->texture->south = mlx_load_png(game->map.ea_path);
-    // printf("here3\n");
-    // game->texture->west = mlx_load_png(game->map.ea_path);
-    // printf("here4\n");
-    // if (!game->texture->east)
-    // {
-    //     ft_putstr_fd("Failed to load texture\n", 2);
-    //     return (0);
-    // }
-    // printf("here5\n");
+    if (!init_textures(game, text))
+        return (0);
     game->mlx = mlx_init(MIN_WIDTH, MIN_HEIGHT, "Cub3D", true);
     if (!game->mlx)
     {
@@ -75,29 +67,31 @@ int init_mlx(t_game *game)
     return (1);
 }
 
+void init_player_angle(t_game *game)
+{
+    if (game->player.direction == 'E')
+        game->player.angle = 0;
+    if (game->player.direction == 'W')
+        game->player.angle = M_PI;
+    if (game->player.direction == 'N')
+        game->player.angle = 3 * M_PI / 2;
+    if (game->player.direction == 'S')
+        game->player.angle = M_PI / 2;
+}
+
 int init_game(t_game *game)
 {
-    //init_test_map(game);
     game->player.speed = 0.025;
-    game->player.angle = 0; // <- based on N S W E
-    game->floor = BLACK_COLOR; // turned rgb in int (need to make function for this);
-    game->ceiling = WHITE_COLOR;
+    init_player_angle(game);
+    game->mouse = 0;
     game->is_resizing = false;
     if (!init_mlx(game))
         return (0);
-    int i = 0;
-    // while (i < game->map.height)
-    // {
-    //     ft_printf("%s\n", game->map.grid[i]);
-    //     i++;
-    // }
-    printf("init_game\n");
     game->image = mlx_new_image(game->mlx, game->width, game->width);
     if (!game->image)
     {
         ft_printf("Failed mlx image\n");
         return (0);
     }
-    printf("init_game1\n");
     return (1);
 }
