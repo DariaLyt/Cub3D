@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlytvync <dlytvync@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/26 12:09:08 by dlytvync          #+#    #+#             */
+/*   Updated: 2026/02/26 12:09:09 by dlytvync         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 static int	select_tex_x(t_ray *ray)
@@ -40,31 +52,31 @@ mlx_texture_t	*get_texture(t_game *game)
 		if (game->ray.dir_x > 0)
 			return (game->texture.east);
 		else
-            return (game->texture.west);
+			return (game->texture.west);
 	}
 	else
 	{
 		if (game->ray.dir_y > 0)
-            return (game->texture.south);
+			return (game->texture.south);
 		else
-            return (game->texture.north);
-    }
+			return (game->texture.north);
+	}
 }
 
-void draw_wall_texture(t_game *game, int x)
+void	draw_wall_texture(t_game *game, int x)
 {
-    int y;
-    int tex_x;
-    int tex_y;
-    uint32_t color;
+	int			y;
+	int			tex_x;
+	int			tex_y;
+	uint32_t	color;
 
-    tex_x = select_tex_x(&game->ray);
-    y = game->wall.visible_start;
-    while (y <= game->wall.visible_end)
-    {
-        tex_y = select_tex_y(game, y);
-        color = get_texture_color(game->ray.texture, tex_x, tex_y);
-        mlx_put_pixel(game->image, x, y, color);
-        y++;
-    }
+	tex_x = select_tex_x(&game->ray);
+	y = game->wall.visible_start;
+	while (y <= game->wall.visible_end)
+	{
+		tex_y = select_tex_y(game, y);
+		color = get_texture_color(game->ray.texture, tex_x, tex_y);
+		mlx_put_pixel(game->image, x, y, color);
+		y++;
+	}
 }
