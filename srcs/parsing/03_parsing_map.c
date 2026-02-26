@@ -42,7 +42,7 @@ int	convert_list_to_grid(t_game *game)
 	{
 		game->map.grid[i] = ft_strdup(current->content);
 		if (!game->map.grid[i])
-			return (ALLOC_FAIL); // free?
+			return (ALLOC_FAIL);
 		current = current->next;
 		i++;
 	}

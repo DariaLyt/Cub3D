@@ -19,34 +19,35 @@ int	parse_file(t_game *game, int fd)
 {
 	char	*line;
 	int		count;
+	int		status;
 
+	status = SUCCESS;
 	count = 0;
 	while ((line = get_next_line(fd)))
 	{
-		if (is_empty_line(line))
+		if (status == SUCCESS)
 		{
-			free(line);
-			continue ;
-		}
-		if (count < 6)
-		{
-			if (is_metadata(game, line) == SUCCESS)
-				count++;
-			else
+			if (is_empty_line(line))
+				;
+			else if (count < 6)
 			{
-				free(line);
-				printf("Corrupted map\n");
-				return (INVALID);
+				if (is_metadata(game, line) == SUCCESS)
+					count++;
+				else
+				{
+					printf("Error: Invalid map\n");
+					status = INVALID;
+				}
 			}
+			else
+				add_to_map_list(game, line);
 		}
-		else
-			add_to_map_list(game, line);
 		free(line);
 	}
-	if (count != 6) // << more rigorous
+	if (status == SUCCESS && count != 6)
 	{
-		printf("Metadata missing\n");
+		printf("Metadata MISSING\n");
 		return (INVALID);
 	}
-	return (SUCCESS);
+	return (status);
 }
