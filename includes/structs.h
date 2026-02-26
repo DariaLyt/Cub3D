@@ -71,7 +71,6 @@ typedef	struct s_ray
 	double hit_y;
 	int side;
 	double wall_x;
-	//xpm_t *textures;
 	mlx_texture_t	*texture;
 }	t_ray;
 
@@ -96,8 +95,11 @@ typedef struct s_game
 	bool	is_resizing;
 	int	new_w;
 	int new_h;
-	t_texture *texture;
+	t_texture texture;
 	t_map	map;
+	int	mouse;
+	int mouse_x;
+	int mouse_y;
 	// struct s_texture	*texture;
 	// struct s_player		*player;
 }			t_game;

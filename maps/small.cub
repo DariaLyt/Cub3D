@@ -1,0 +1,11 @@
+NO ./textures/Bark.png
+SO ./textures/bookshelf.png
+WE ./textures/BrickOv.png
+EA ./textures/Bricks.png
+
+F 225,0,0
+C 225,30,0
+
+111
+1N1
+111

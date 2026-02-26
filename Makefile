@@ -37,6 +37,7 @@ SRC     := srcs/main/main.c \
 		   srcs/execution/rotation.c \
 		   srcs/execution/walls.c \
 		   srcs/execution/textures.c \
+		   srcs/execution/dda.c \
 
 # Object files
 OBJ     := $(SRC:srcs/%.c=$(OBJDIR)/%.o)
