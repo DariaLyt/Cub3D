@@ -42,13 +42,15 @@ int	assign_rgb(char **m_str)
 {
 	int		rgb;
 	char	*pos;
+	int		i;
 
+	i = 0;
 	pos = *m_str;
 	while (*pos && (*pos == ' ' || *pos == '\t'))
 		pos++;
 	if (!ft_isdigit(*pos))
-		return (INVALID);
-	rgb = atoi(pos);
+		return (-1);
+	rgb = ft_atoi(pos);
 	while (*pos && ft_isdigit(*pos))
 		pos++;
 	while (*pos && (*pos == ' ' || *pos == '\t'))
@@ -69,19 +71,32 @@ int	save_color(int *dest, char *src)
 		return (INVALID);
 	path = ft_strtrim(src, " \n\t");
 	tmp = path;
+	if (is_rgb(path) == INVALID)
+		return (INVALID);
 	r = assign_rgb(&tmp);
 	g = assign_rgb(&tmp);
 	b = assign_rgb(&tmp);
 	free(path);
 	while (*tmp && (*tmp == ' ' || *tmp == '\t'))
 		tmp++;
-	if (*tmp != '\0' || r == -1 || g == -1 || b == -1 || r > 255 || g > 255
-		|| b > 255)
-	{
-		free(path);
+	if (r == -1 || g == -1 || b == -1 || r > 255 || g > 255 || b > 255)
 		return (INVALID);
-	}
-	free(path);
 	*dest = (0xFF | b << 8 | g << 16 | r << 24);
+	return (SUCCESS);
+}
+
+int	is_rgb(char *path)
+{
+	int	i;
+
+	i = 0;
+	while (path[i])
+	{
+		while (path[i] == ' ')
+			i++;
+		if (!ft_isdigit(path[i]) && path[i] != ',')
+			return (INVALID);
+		i++;
+	}
 	return (SUCCESS);
 }

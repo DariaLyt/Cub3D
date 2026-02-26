@@ -14,25 +14,19 @@ int is_valid_ext(char *map_name)
 
 int parse_line(t_game *game, char *line)
 {
-    char    *trimmed;
-
-    trimmed = skip_spaces(line);
-    if (*trimmed == '\0')
+	if (game->map.meta_count < 6)
     {
-        if (game->map.temp_list != NULL)
-            return (printf("Error: Empty line inside map\n"), INVALID);
-        return (SUCCESS);
-    }
-    if (game->map.meta_count < 6)
-    {
+		if(is_empty_line(line))
+			return(SUCCESS);
         if (is_metadata(game, line) == SUCCESS)
         {
-            game->map.meta_count++;
+			game->map.meta_count++;
             return (SUCCESS);
         }
-		printf("Error: Missing metadata or invalid identifier\n");
-        return (INVALID);
+			printf("Error: Missing metadata or invalid identifier\n");
+			return (INVALID);
     }
+	
     add_to_map_list(game, line);
     return (SUCCESS);
 }
@@ -46,12 +40,13 @@ int parse_file(t_game *game, int fd)
     game->map.meta_count = 0;
     while ((line = get_next_line(fd)))
     {
+		printf("%s", line);
         status = parse_line(game, line);
 		free(line);
         if (status == INVALID)
 		{
 			while ((line = get_next_line(fd)))
-				free(line);
+			free(line);
             return (INVALID);
 		}
     }

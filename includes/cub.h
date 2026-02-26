@@ -47,6 +47,7 @@ int				is_metadata(t_game *game, char *line);
 int				save_path(char **dest, char *src);
 int				save_color(int *dest, char *src);
 int				assign_rgb(char **m_str);
+int				is_rgb(char *path);
 
 // Map list
 int				add_to_map_list(t_game *game, char *line);
@@ -69,10 +70,6 @@ int				is_valid_char(char c);
 void			free_map(t_game *game);
 void			free_tmp_map(char **map);
 void			free_texture(t_game *game);
-
-// Error
-
-// Parsing Utils
 
 // Debug
 void			print_game_data(t_game *game);
