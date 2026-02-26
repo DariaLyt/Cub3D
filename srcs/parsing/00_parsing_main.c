@@ -1,18 +1,9 @@
 #include "cub.h"
 
-/*
-1. setup the direction textures
-2. parse texture also initiliazes
-3. then floor and sky box (rgb)
-4. check if textures are all set
-5. if all set then map grid is parsed
-6. if valid ? profit
-*/
-
 int	parsing(char *map_name, t_game *game)
 {
-	// if (validity check here)
-	// return (0);
+	if (is_valid_ext(map_name) == INVALID)
+		return (INVALID);
 	if (fill_map_struct(game, (map_name)) == INVALID)
 		return (INVALID);
 	return (SUCCESS);
@@ -33,10 +24,10 @@ int	fill_map_struct(t_game *game, char *map_name)
 	}
 	close(fd);
 	convert_list_to_grid(game);
-	if(is_map_closed(game) == INVALID)
+	if (is_map_closed(game) == INVALID)
 	{
 		free_map(game);
-		return(INVALID);
+		return (INVALID);
 	}
 	ft_lstclear(&game->map.temp_list, free);
 	return (SUCCESS);

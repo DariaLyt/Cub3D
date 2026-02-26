@@ -66,22 +66,22 @@ int	save_color(int *dest, char *src)
 
 	int r, g, b;
 	if (*dest != -1)
-	{
-		free(path);
 		return (INVALID);
-	}
 	path = ft_strtrim(src, " \n\t");
 	tmp = path;
 	r = assign_rgb(&tmp);
 	g = assign_rgb(&tmp);
 	b = assign_rgb(&tmp);
 	free(path);
-	// while(*tmp && (*tmp == ' ' || *tmp == '\t'))
-	// 	tmp++;
-	// if(*tmp != '\0')
-	// 	return(INVALID);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+	while (*tmp && (*tmp == ' ' || *tmp == '\t'))
+		tmp++;
+	if (*tmp != '\0' || r == -1 || g == -1 || b == -1 || r > 255 || g > 255
+		|| b > 255)
+	{
+		free(path);
 		return (INVALID);
+	}
+	free(path);
 	*dest = (0xFF | b << 8 | g << 16 | r << 24);
 	return (SUCCESS);
 }

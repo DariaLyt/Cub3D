@@ -1,53 +1,66 @@
 #include "cub.h"
 
-char	*find_file(char *map_name)
+int is_valid_ext(char *map_name)
 {
-	char	*path_name;
-	char	*extension;
-	int		fd;
+    size_t len;
 
-	extension = ".cub";
-	path_name = ft_strnstr(map_name, extension, ft_strlen(map_name));
-	fd = open(path_name, O_RDONLY);
-	if (fd == -1)
-		return (NULL);
-	close(fd);
-	return (path_name);
+    if (!map_name)
+        return (INVALID);
+    len = ft_strlen(map_name);
+    if (len < 5 || ft_strncmp(&map_name[len - 4], ".cub", 4) != 0)
+        return (printf("Error: Invalid file extension\n"), INVALID);
+    return (SUCCESS);
 }
 
-int	parse_file(t_game *game, int fd)
+int parse_line(t_game *game, char *line)
 {
-	char	*line;
-	int		count;
-	int		status;
+    char    *trimmed;
 
-	status = SUCCESS;
-	count = 0;
-	while ((line = get_next_line(fd)))
-	{
-		if (status == SUCCESS)
-		{
-			if (is_empty_line(line))
-				;
-			else if (count < 6)
-			{
-				if (is_metadata(game, line) == SUCCESS)
-					count++;
-				else
-				{
-					printf("Error: Invalid map\n");
-					status = INVALID;
-				}
-			}
-			else
-				add_to_map_list(game, line);
-		}
-		free(line);
-	}
-	if (status == SUCCESS && count != 6)
-	{
-		printf("Metadata MISSING\n");
-		return (INVALID);
-	}
-	return (status);
+    trimmed = skip_spaces(line);
+    if (*trimmed == '\0')
+    {
+        if (game->map.temp_list != NULL)
+            return (printf("Error: Empty line inside map\n"), INVALID);
+        return (SUCCESS);
+    }
+    if (game->map.meta_count < 6)
+    {
+        if (is_metadata(game, line) == SUCCESS)
+        {
+            game->map.meta_count++;
+            return (SUCCESS);
+        }
+        return (printf("Error: Missing metadata or invalid identifier\n"), INVALID);
+    }
+    add_to_map_list(game, line);
+    return (SUCCESS);
 }
+
+int parse_file(t_game *game, int fd)
+{
+    char    *line;
+    int     status;
+
+    game->map.meta_count = 0;
+    while ((line = get_next_line(fd)))
+    {
+        status = parse_line(game, line);
+        if (status == INVALID)
+        {
+            free(line);
+            return (INVALID);
+        }
+    }
+    if (game->map.meta_count != 6)
+        return (printf("Error: Metadata missing\n"), INVALID);
+    if (!game->map.temp_list)
+        return (printf("Error: Map missing\n"), INVALID);
+    return (SUCCESS);
+}
+
+/*
+
+check for anything besides metadata when count < 6
+check for duplicates
+
+*/
