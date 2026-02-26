@@ -67,6 +67,7 @@ int				is_valid_char(char c);
 // Cleanup
 void			free_map(t_game *game);
 void			free_tmp_map(char **map);
+void			free_texture(t_game *game);
 
 // Error
 
