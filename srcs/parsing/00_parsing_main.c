@@ -47,6 +47,11 @@ void	init_game_struct(t_game *game)
 	game->map.width = 0;
 	game->map.height = 0;
 	game->map.temp_list = NULL;
+	game->texture.north = NULL;
+	game->texture.east = NULL;
+	game->texture.south = NULL;
+	game->texture.west = NULL;
+
 }
 
 void	print_game_data(t_game *game)

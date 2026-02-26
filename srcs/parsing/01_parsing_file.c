@@ -30,7 +30,8 @@ int parse_line(t_game *game, char *line)
             game->map.meta_count++;
             return (SUCCESS);
         }
-        return (printf("Error: Missing metadata or invalid identifier\n"), INVALID);
+		printf("Error: Missing metadata or invalid identifier\n");
+        return (INVALID);
     }
     add_to_map_list(game, line);
     return (SUCCESS);
@@ -40,16 +41,19 @@ int parse_file(t_game *game, int fd)
 {
     char    *line;
     int     status;
+	status = SUCCESS;
 
     game->map.meta_count = 0;
     while ((line = get_next_line(fd)))
     {
         status = parse_line(game, line);
+		free(line);
         if (status == INVALID)
-        {
-            free(line);
+		{
+			while ((line = get_next_line(fd)))
+				free(line);
             return (INVALID);
-        }
+		}
     }
     if (game->map.meta_count != 6)
         return (printf("Error: Metadata missing\n"), INVALID);
@@ -63,4 +67,9 @@ int parse_file(t_game *game, int fd)
 check for anything besides metadata when count < 6
 check for duplicates
 
+
+TESTS REQUIRED!
+- test multiple meta
+- test for garbage on rgb meta data or extra characters
+- test 
 */
