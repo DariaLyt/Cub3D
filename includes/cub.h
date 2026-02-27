@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pnurmi <pnurmi@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/27 09:36:56 by pnurmi            #+#    #+#             */
+/*   Updated: 2026/02/27 14:32:47 by pnurmi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB_H
 # define CUB_H
 
-# include "libft.h"
-//# include "../MLX42/include/MLX42/MLX42.h"
 # include "MLX42/MLX42.h"
+# include "libft.h"
 # include "structs.h"
 # include <fcntl.h>
 # include <math.h>
@@ -32,6 +43,7 @@ int				parsing(char *map_name, t_game *game);
 int				parse_file(t_game *game, int fd);
 int				parse_line(t_game *game, char *line);
 int				convert_list_to_grid(t_game *game);
+void			empty_gnl_stash(int fd);
 
 // Map Validity check
 int				is_valid_map_line(char *line);
@@ -47,7 +59,7 @@ int				is_metadata(t_game *game, char *line);
 int				save_path(char **dest, char *src);
 int				save_color(int *dest, char *src);
 int				assign_rgb(char **m_str);
-int				is_rgb(char *path);
+int				is_rgb_format(char *str);
 
 // Map list
 int				add_to_map_list(t_game *game, char *line);
@@ -70,9 +82,6 @@ int				is_valid_char(char c);
 void			free_map(t_game *game);
 void			free_tmp_map(char **map);
 void			free_texture(t_game *game);
-
-// Debug
-void			print_game_data(t_game *game);
 
 // Execution
 int				init_game(t_game *game);

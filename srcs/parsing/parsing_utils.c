@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pnurmi <pnurmi@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/27 09:36:24 by pnurmi            #+#    #+#             */
+/*   Updated: 2026/02/27 14:32:26 by pnurmi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 char	*ft_strjoin_and_free(char *map_whole, char *line)
@@ -54,4 +66,17 @@ void	free_texture(t_game *game)
 		mlx_delete_texture(game->texture.south);
 	if (game->texture.west)
 		mlx_delete_texture(game->texture.west);
+}
+
+void	free_tmp_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }

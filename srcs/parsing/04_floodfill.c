@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   04_floodfill.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pnurmi <pnurmi@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/27 09:36:14 by pnurmi            #+#    #+#             */
+/*   Updated: 2026/02/27 09:36:16 by pnurmi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 int	is_map_closed(t_game *game)
@@ -103,17 +115,4 @@ int	flood_fill(t_game *game, char **temp_grid, int x, int y)
 	if (flood_fill(game, temp_grid, x, y - 1) == INVALID)
 		return (INVALID);
 	return (SUCCESS);
-}
-
-void	free_tmp_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
 }
