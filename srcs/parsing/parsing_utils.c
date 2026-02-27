@@ -6,7 +6,7 @@
 /*   By: pnurmi <pnurmi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 09:36:24 by pnurmi            #+#    #+#             */
-/*   Updated: 2026/02/27 09:40:13 by pnurmi           ###   ########.fr       */
+/*   Updated: 2026/02/27 14:32:26 by pnurmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,38 +79,4 @@ void	free_tmp_map(char **map)
 		i++;
 	}
 	free(map);
-}
-
-void	print_game_data(t_game *game)
-{
-	int	i;
-
-	printf("\n--- DEBUG: GAME DATA ---\n");
-	// 1. Print Texture Paths
-	printf("NO Path: [%s]\n", game->map.no_path ? game->map.no_path : "NULL");
-	printf("SO Path: [%s]\n", game->map.so_path ? game->map.so_path : "NULL");
-	printf("WE Path: [%s]\n", game->map.we_path ? game->map.we_path : "NULL");
-	printf("EA Path: [%s]\n", game->map.ea_path ? game->map.ea_path : "NULL");
-	// 2. Print Colors (using %d for decimal or %X for Hexadecimal)
-	printf("Floor Color:   %d (Hex: 0x%X)\n", game->map.floor_col,
-		game->map.floor_col);
-	printf("Sky/Ceil Color: %d (Hex: 0x%X)\n", game->map.ceiling_col,
-		game->map.ceiling_col);
-	// 3. Print Map Dimensions
-	printf("Map Dimensions: %d (W) x %d (H)\n", game->map.width,
-		game->map.height);
-	// 4. Print the Grid
-	printf("Grid Content:\n");
-	if (game->map.grid)
-	{
-		i = 0;
-		while (game->map.grid[i])
-		{
-			printf("[%02d] |%s|\n", i, game->map.grid[i]);
-			i++;
-		}
-	}
-	else
-		printf("[NULL GRID]\n");
-	printf("------------------------\n\n");
 }

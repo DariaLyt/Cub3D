@@ -6,7 +6,7 @@
 /*   By: pnurmi <pnurmi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 09:36:20 by pnurmi            #+#    #+#             */
-/*   Updated: 2026/02/27 09:36:22 by pnurmi           ###   ########.fr       */
+/*   Updated: 2026/02/27 14:32:08 by pnurmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,9 @@ int	execution(t_game *game)
 
 int	run_game(char *map_name, t_game *game)
 {
-	// game = malloc(sizeof(t_game));
-	// if (!game)
-	// return (0);
 	init_game_struct(game);
 	if (parsing(map_name, game) == INVALID)
-		return (INVALID);  // error and cleanup
-	print_game_data(game); // << debug print // delete me when done
-	// execution();
+		return (INVALID);
 	if (!execution(game))
 	{
 		free_map(game);

@@ -6,7 +6,7 @@
 /*   By: pnurmi <pnurmi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 09:36:56 by pnurmi            #+#    #+#             */
-/*   Updated: 2026/02/27 10:33:23 by pnurmi           ###   ########.fr       */
+/*   Updated: 2026/02/27 14:32:47 by pnurmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@
 # define BLACK_COLOR 255
 # define RED_COLOR 0xFF0000FF
 # define COLLISION 0.15
-
-// Debug
-void	print_game_data(t_game *game); // Delete!
 
 // Main
 int				run_game(char *map_name, t_game *game);
