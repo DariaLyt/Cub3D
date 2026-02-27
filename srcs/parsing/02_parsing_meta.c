@@ -42,9 +42,7 @@ int	assign_rgb(char **m_str)
 {
 	int		rgb;
 	char	*pos;
-	int		i;
 
-	i = 0;
 	pos = *m_str;
 	while (*pos && (*pos == ' ' || *pos == '\t'))
 		pos++;
@@ -61,18 +59,42 @@ int	assign_rgb(char **m_str)
 	return (rgb);
 }
 
+int	is_rgb_format(char *str)
+{
+	int	i;
+	int	comma_count;
+
+	i = 0;
+	comma_count = 0;
+	while (str[i])
+	{
+		if (str[i] == ',')
+			comma_count++;
+		if (!ft_isdigit(str[i]) && str[i] != ',' && !is_space(str[i]))
+			return (INVALID);
+		i++;
+	}
+	if (comma_count != 2)
+		return (INVALID);
+	return (SUCCESS);
+}
+
 int	save_color(int *dest, char *src)
 {
 	char	*path;
 	char	*tmp;
+	int		r;
+	int		g;
+	int		b;
 
-	int r, g, b;
 	if (*dest != -1)
 		return (INVALID);
 	path = ft_strtrim(src, " \n\t");
-	tmp = path;
-	if (is_rgb(path) == INVALID)
+	if (!path)
 		return (INVALID);
+	if (is_rgb_format(path) == INVALID)
+		return(free(path), INVALID);
+	tmp = path;
 	r = assign_rgb(&tmp);
 	g = assign_rgb(&tmp);
 	b = assign_rgb(&tmp);
@@ -82,21 +104,5 @@ int	save_color(int *dest, char *src)
 	if (r == -1 || g == -1 || b == -1 || r > 255 || g > 255 || b > 255)
 		return (INVALID);
 	*dest = (0xFF | b << 8 | g << 16 | r << 24);
-	return (SUCCESS);
-}
-
-int	is_rgb(char *path)
-{
-	int	i;
-
-	i = 0;
-	while (path[i])
-	{
-		while (path[i] == ' ')
-			i++;
-		if (!ft_isdigit(path[i]) && path[i] != ',')
-			return (INVALID);
-		i++;
-	}
 	return (SUCCESS);
 }

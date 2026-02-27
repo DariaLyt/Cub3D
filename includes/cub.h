@@ -47,7 +47,7 @@ int				is_metadata(t_game *game, char *line);
 int				save_path(char **dest, char *src);
 int				save_color(int *dest, char *src);
 int				assign_rgb(char **m_str);
-int				is_rgb(char *path);
+int				is_rgb_format(char *str);
 
 // Map list
 int				add_to_map_list(t_game *game, char *line);
