@@ -6,7 +6,7 @@
 /*   By: pnurmi <pnurmi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 09:35:54 by pnurmi            #+#    #+#             */
-/*   Updated: 2026/02/27 09:36:02 by pnurmi           ###   ########.fr       */
+/*   Updated: 2026/02/27 10:33:19 by pnurmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ int	parse_file(t_game *game, int fd)
 
 	status = SUCCESS;
 	game->map.meta_count = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
-		printf("%s", line);
 		status = parse_line(game, line);
 		free(line);
 		if (status == INVALID)
 		{
-			while ((line = get_next_line(fd)))
-				free(line);
+			empty_gnl_stash(fd);
 			return (INVALID);
 		}
+		line = get_next_line(fd);
 	}
 	if (game->map.meta_count != 6)
 		return (printf("Error: Metadata missing\n"), INVALID);
@@ -68,14 +68,14 @@ int	parse_file(t_game *game, int fd)
 	return (SUCCESS);
 }
 
-/*
+void	empty_gnl_stash(int fd)
+{
+	char	*line;
 
-check for anything besides metadata when count < 6
-check for duplicates
-
-
-TESTS REQUIRED!
-- test multiple meta
-- test for garbage on rgb meta data or extra characters
-- test
-*/
+	line = get_next_line(fd);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+}

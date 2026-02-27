@@ -6,7 +6,7 @@
 /*   By: pnurmi <pnurmi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 09:36:56 by pnurmi            #+#    #+#             */
-/*   Updated: 2026/02/27 09:40:56 by pnurmi           ###   ########.fr       */
+/*   Updated: 2026/02/27 10:33:23 by pnurmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define COLLISION 0.15
 
 // Debug
-void			print_game_data(t_game *game); //Delete!
+void	print_game_data(t_game *game); // Delete!
 
 // Main
 int				run_game(char *map_name, t_game *game);
@@ -46,6 +46,7 @@ int				parsing(char *map_name, t_game *game);
 int				parse_file(t_game *game, int fd);
 int				parse_line(t_game *game, char *line);
 int				convert_list_to_grid(t_game *game);
+void			empty_gnl_stash(int fd);
 
 // Map Validity check
 int				is_valid_map_line(char *line);
