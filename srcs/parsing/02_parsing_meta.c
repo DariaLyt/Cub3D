@@ -6,7 +6,7 @@
 /*   By: pnurmi <pnurmi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 09:36:26 by pnurmi            #+#    #+#             */
-/*   Updated: 2026/02/27 09:36:29 by pnurmi           ###   ########.fr       */
+/*   Updated: 2026/02/27 12:00:36 by pnurmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,11 @@ int	save_color(int *dest, char *src)
 	r = assign_rgb(&tmp);
 	g = assign_rgb(&tmp);
 	b = assign_rgb(&tmp);
-	free(path);
 	while (*tmp && (*tmp == ' ' || *tmp == '\t'))
 		tmp++;
 	if (r == -1 || g == -1 || b == -1 || r > 255 || g > 255 || b > 255)
-		return (INVALID);
+		return (free(path), INVALID);
+	free(path);
 	*dest = (0xFF | b << 8 | g << 16 | r << 24);
 	return (SUCCESS);
 }
