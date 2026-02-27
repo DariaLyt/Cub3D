@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlytvync <dlytvync@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pnurmi <pnurmi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 12:08:28 by dlytvync          #+#    #+#             */
-/*   Updated: 2026/02/26 12:08:28 by dlytvync         ###   ########.fr       */
+/*   Updated: 2026/02/27 14:37:07 by pnurmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	init_mlx(t_game *game)
 	mlx_get_monitor_size(0, &monitor_width, &monitor_height);
 	game->width = monitor_width / 2;
 	game->height = monitor_height / 2;
-	ft_printf("width - %d\nheight - %d\n", game->width, game->height);
 	mlx_set_window_size(game->mlx, game->width, game->height);
 	mlx_set_window_limit(game->mlx, MIN_WIDTH, MIN_HEIGHT,
 		monitor_width, monitor_height);

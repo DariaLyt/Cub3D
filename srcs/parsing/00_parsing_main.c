@@ -6,7 +6,7 @@
 /*   By: pnurmi <pnurmi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 09:36:08 by pnurmi            #+#    #+#             */
-/*   Updated: 2026/02/27 09:40:07 by pnurmi           ###   ########.fr       */
+/*   Updated: 2026/02/27 14:43:34 by pnurmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int	fill_map_struct(t_game *game, char *map_name)
 
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
+	{
+		printf("Error: Failed to open map file\n");
 		return (INVALID);
+	}
 	if (parse_file(game, fd) == INVALID)
 	{
 		close(fd);
