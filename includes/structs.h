@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pnurmi <pnurmi@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/27 09:37:11 by pnurmi            #+#    #+#             */
+/*   Updated: 2026/02/27 09:37:34 by pnurmi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
 typedef enum e_status
 {
-	SUCCESS = 0, // success always 0 or "if" checks will fail!
+	SUCCESS = 0,
 	INVALID = 1,
 	VALID = 2,
 	ALLOC_FAIL = 3,
@@ -58,7 +70,7 @@ typedef struct s_player
 {
 	double			pos_x;
 	double			pos_y;
-	char direction; // direction facing on spawn
+	char			direction;
 	double			angle;
 	double			speed;
 }					t_player;
@@ -101,8 +113,6 @@ typedef struct s_game
 	int				mouse;
 	int				mouse_x;
 	int				mouse_y;
-	// struct s_texture	*texture;
-	// struct s_player		*player;
 }					t_game;
 
 #endif

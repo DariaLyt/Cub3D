@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pnurmi <pnurmi@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/27 09:36:56 by pnurmi            #+#    #+#             */
+/*   Updated: 2026/02/27 09:40:56 by pnurmi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB_H
 # define CUB_H
 
-# include "libft.h"
-//# include "../MLX42/include/MLX42/MLX42.h"
 # include "MLX42/MLX42.h"
+# include "libft.h"
 # include "structs.h"
 # include <fcntl.h>
 # include <math.h>
@@ -23,6 +34,9 @@
 # define BLACK_COLOR 255
 # define RED_COLOR 0xFF0000FF
 # define COLLISION 0.15
+
+// Debug
+void			print_game_data(t_game *game); //Delete!
 
 // Main
 int				run_game(char *map_name, t_game *game);
@@ -70,9 +84,6 @@ int				is_valid_char(char c);
 void			free_map(t_game *game);
 void			free_tmp_map(char **map);
 void			free_texture(t_game *game);
-
-// Debug
-void			print_game_data(t_game *game);
 
 // Execution
 int				init_game(t_game *game);

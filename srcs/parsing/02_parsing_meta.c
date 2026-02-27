@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   02_parsing_meta.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pnurmi <pnurmi@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/27 09:36:26 by pnurmi            #+#    #+#             */
+/*   Updated: 2026/02/27 09:36:29 by pnurmi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 int	is_metadata(t_game *game, char *line)
@@ -93,7 +105,7 @@ int	save_color(int *dest, char *src)
 	if (!path)
 		return (INVALID);
 	if (is_rgb_format(path) == INVALID)
-		return(free(path), INVALID);
+		return (free(path), INVALID);
 	tmp = path;
 	r = assign_rgb(&tmp);
 	g = assign_rgb(&tmp);
