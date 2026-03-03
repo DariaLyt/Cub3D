@@ -68,7 +68,3 @@ DDA algo, ray calculation
 - double paths on single line
 - spaces and tabs in texture/metadata line in map
 
-Leak
-====================
-leaking with invalid map with 2 EA paths 5bytes
-leaking with invalid map with non map file

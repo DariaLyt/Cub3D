@@ -6,7 +6,7 @@
 /*   By: pnurmi <pnurmi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 09:35:54 by pnurmi            #+#    #+#             */
-/*   Updated: 2026/02/27 10:33:19 by pnurmi           ###   ########.fr       */
+/*   Updated: 2026/03/03 10:43:46 by pnurmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	parse_line(t_game *game, char *line)
 		printf("Error: Missing metadata or invalid identifier\n");
 		return (INVALID);
 	}
-	add_to_map_list(game, line);
+	if(add_to_map_list(game, line) == INVALID)
+		return(INVALID);
 	return (SUCCESS);
 }
 
